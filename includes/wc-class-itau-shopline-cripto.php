@@ -228,111 +228,98 @@ class WC_Itau_Shopline_Cripto {
 	/**
 	 * Generate payment data.
 	 *
-	 * @param  int    $order_number
-	 * @param  float  $order_total
-	 * @param  string $description
-	 * @param  string $customer_name
-	 * @param  string $registration
-	 * @param  string $document
-	 * @param  string $address
-	 * @param  string $neighborhood
-	 * @param  string $zipcode
-	 * @param  string $city
-	 * @param  string $state
-	 * @param  string $expiry
-	 * @param  string $return_url
-	 * @param  string $note_line1
-	 * @param  string $note_line2
-	 * @param  string $note_line3
+	 * @param  array $data
 	 *
 	 * @return string
 	 */
-	public function generate_data(
-		$order_number,
-		$order_total,
-		$description,
-		$customer_name,
-		$registration,
-		$document,
-		$address,
-		$neighborhood,
-		$zipcode,
-		$city,
-		$state,
-		$expiry,
-		$return_url,
-		$note_line1,
-		$note_line2,
-		$note_line3
-	) {
+	public function generate_data( $data ) {
+		$default = array(
+			'order_number'  => '',
+			'order_total'   => '',
+			'description'   => '',
+			'customer_name' => '',
+			'registration'  => '',
+			'document'      => '',
+			'address'       => '',
+			'neighborhood'  => '',
+			'zipcode'       => '',
+			'city'          => '',
+			'state'         => '',
+			'expiry'        => '',
+			'return_url'    => '',
+			'note_line1'    => '',
+			'note_line2'    => '',
+			'note_line3'    => ''
+		);
+		$args = wp_parse_args( $data, $default );
 
-		if ( ( 1 > strlen( $order_number ) ) || ( 8 < strlen( $order_number ) ) ) {
+		if ( ( 1 > strlen( $args['order_number'] ) ) || ( 8 < strlen( $args['order_number'] ) ) ) {
 			throw new Exception( __( 'Invalid order number.', 'woocommerce-itau-shopline' ) );
 		}
 
-		if ( ! in_array( $registration, array( '01', '02' ) ) ) {
+		if ( ! in_array( $args['registration'], array( '01', '02' ) ) ) {
 			throw new Exception( __( 'Invalid registration code.', 'woocommerce-itau-shopline' ) );
 		}
 
-		if ( '' != $document && ( ! is_numeric( $document ) && 14 < strlen( $document ) ) ) {
+		if ( '' != $args['document'] && ( ! is_numeric( $args['document'] ) && 14 < strlen( $args['document'] ) ) ) {
 			throw new Exception( __( 'Invalid document number.', 'woocommerce-itau-shopline' ) );
 		}
 
-		if ( '' != $zipcode && ( ! is_numeric( $zipcode ) || 8 != strlen( $zipcode ) ) ) {
+		if ( '' != $args['zipcode'] && ( ! is_numeric( $args['zipcode'] ) || 8 != strlen( $args['zipcode'] ) ) ) {
 			throw new Exception( __( 'Invalid zipcode.', 'woocommerce-itau-shopline' ) );
 		}
 
-		if ( '' != $expiry && ( ! is_numeric( $expiry ) || 8 != strlen( $expiry ) ) ) {
+		if ( '' != $args['expiry'] && ( ! is_numeric( $args['expiry'] ) || 8 != strlen( $args['expiry'] ) ) ) {
 			throw new Exception( __( 'Invalid expiry date.', 'woocommerce-itau-shopline' ) );
 		}
 
-		if ( 60 < strlen( $note_line1 ) ) {
+		if ( 60 < strlen( $args['note_line1'] ) ) {
 			throw new Exception( __( 'Invalid note line 1. Can not be more than 60 characters.', 'woocommerce-itau-shopline' ) );
 		}
 
-		if ( 60 < strlen( $note_line2 ) ) {
+		if ( 60 < strlen( $args['note_line2'] ) ) {
 			throw new Exception( __( 'Invalid note line 2. Can not be more than 60 characters.', 'woocommerce-itau-shopline' ) );
 		}
 
-		if ( 60 < strlen( $note_line3 ) ) {
+		if ( 60 < strlen( $args['note_line3'] ) ) {
 			throw new Exception( __( 'Invalid note line 3. Can not be more than 60 characters.', 'woocommerce-itau-shopline' ) );
 		}
 
 		// Fix zeros.
-		$order_number = $this->fill_zeros( $order_number, 8 );
-		$order_total  = $this->fill_zeros( number_format( $order_total, 2, '', '' ) , 10 );
+		$args['order_number'] = $this->fill_zeros( $args['order_number'], 8 );
+		$args['order_total']  = $this->fill_zeros( number_format( $args['order_total'], 2, '', '' ) , 10 );
 
 		// Remove accents.
-		$description   = $this->remove_accents( $description );
-		$customer_name = $this->remove_accents( $customer_name );
-		$address       = $this->remove_accents( $address );
-		$neighborhood  = $this->remove_accents( $neighborhood );
-		$city          = $this->remove_accents( $city );
-		$note_line1    = $this->remove_accents( $note_line1 );
-		$note_line2    = $this->remove_accents( $note_line2 );
-		$note_line3    = $this->remove_accents( $note_line3 );
+		$args['description']   = $this->remove_accents( $args['description'] );
+		$args['customer_name'] = $this->remove_accents( $args['customer_name'] );
+		$args['address']       = $this->remove_accents( $args['address'] );
+		$args['neighborhood']  = $this->remove_accents( $args['neighborhood'] );
+		$args['city']          = $this->remove_accents( $args['city'] );
+		$args['note_line1']    = $this->remove_accents( $args['note_line1'] );
+		$args['note_line2']    = $this->remove_accents( $args['note_line2'] );
+		$args['note_line3']    = $this->remove_accents( $args['note_line3'] );
 
 		// Fill empty values.
-		$description   = $this->fill_empty( $description, 40 );
-		$customer_name = $this->fill_empty( $customer_name, 30 );
-		$registration  = $this->fill_empty( $registration, 2 );
-		$document      = $this->fill_empty( $document, 14 );
-		$address       = $this->fill_empty( $address, 40 );
-		$neighborhood  = $this->fill_empty( $neighborhood, 15 );
-		$zipcode       = $this->fill_empty( $zipcode, 8 );
-		$city          = $this->fill_empty( $city, 15 );
-		$state         = $this->fill_empty( $state, 2 );
-		$expiry        = $this->fill_empty( $expiry, 8 );
-		$return_url    = $this->fill_empty( $return_url, 60 );
-		$note_line1    = $this->fill_empty( $note_line1, 60 );
-		$note_line2    = $this->fill_empty( $note_line2, 60 );
-		$note_line3    = $this->fill_empty( $note_line3, 60 );
+		$args['description']   = $this->fill_empty( $args['description'], 40 );
+		$args['customer_name'] = $this->fill_empty( $args['customer_name'], 30 );
+		$args['registration']  = $this->fill_empty( $args['registration'], 2 );
+		$args['document']      = $this->fill_empty( $args['document'], 14 );
+		$args['address']       = $this->fill_empty( $args['address'], 40 );
+		$args['neighborhood']  = $this->fill_empty( $args['neighborhood'], 15 );
+		$args['zipcode']       = $this->fill_empty( $args['zipcode'], 8 );
+		$args['city']          = $this->fill_empty( $args['city'], 15 );
+		$args['state']         = $this->fill_empty( $args['state'], 2 );
+		$args['expiry']        = $this->fill_empty( $args['expiry'], 8 );
+		$args['return_url']    = $this->fill_empty( $args['return_url'], 60 );
+		$args['note_line1']    = $this->fill_empty( $args['note_line1'], 60 );
+		$args['note_line2']    = $this->fill_empty( $args['note_line2'], 60 );
+		$args['note_line3']    = $this->fill_empty( $args['note_line3'], 60 );
 
-		$_data = $this->algorithm( $order_number . $order_total . $description . $customer_name . $registration . $document . $address . $neighborhood . $zipcode . $city . $state . $expiry . $return_url . $note_line1 . $note_line2 . $note_line3, $this->key );
+		$_algorithm = $this->algorithm( $args['order_number'] . $args['order_total'] . $args['description'] . $args['customer_name'] . $args['registration'] . $args['document'] . $args['address'] . $args['neighborhood'] . $args['zipcode'] . $args['city'] . $args['state'] . $args['expiry'] . $args['return_url'] . $args['note_line1'] . $args['note_line2'] . $args['note_line3'], $this->key );
 
-		$data = $this->algorithm( $this->code . $_data, self::ITAU_KEY );
+		$algorithm = $this->algorithm( $this->code . $_algorithm, self::ITAU_KEY );
 
-		return $this->convert( $data );
+		return $this->convert( $algorithm );
 	}
 
 	/**
@@ -343,10 +330,10 @@ class WC_Itau_Shopline_Cripto {
 	 * @return string
 	 */
 	public function generate_cripto( $customer_code ) {
-		$_data = $this->algorithm( $customer_code, $this->key );
-		$data  = $this->algorithm( $this->code . $_data, self::ITAU_KEY);
+		$_algorithm = $this->algorithm( $customer_code, $this->key );
+		$algorithm  = $this->algorithm( $this->code . $_algorithm, self::ITAU_KEY);
 
-		return $this->convert( $data );
+		return $this->convert( $algorithm );
 	}
 
 	/**
@@ -364,10 +351,10 @@ class WC_Itau_Shopline_Cripto {
 
 		$order_number = $this->fill_zeros( $order_number, 8 );
 
-		$_data = $this->algorithm( $order_number . $type, $this->key );
-		$data  = $this->algorithm( $this->code . $_data, self::ITAU_KEY );
+		$_algorithm = $this->algorithm( $order_number . $type, $this->key );
+		$algorithm  = $this->algorithm( $this->code . $_algorithm, self::ITAU_KEY );
 
-		return $this->convert( $data );
+		return $this->convert( $algorithm );
 	}
 
 	/**
@@ -378,13 +365,13 @@ class WC_Itau_Shopline_Cripto {
 	 * @return array
 	 */
 	public function decripto( $data ) {
-		$data   = $this->unconvert( $data );
-		$string = $this->algorithm( $data, $this->key );
+		$data      = $this->unconvert( $data );
+		$algorithm = $this->algorithm( $data, $this->key );
 
 		return array(
-			'code'         => substr( $string, 0, 26 ),
-			'order_number' => substr( $string, 26, 8 ),
-			'payment_type' => substr( $string, 34, 2 )
+			'code'         => substr( $algorithm, 0, 26 ),
+			'order_number' => substr( $algorithm, 26, 8 ),
+			'payment_type' => substr( $algorithm, 34, 2 )
 		);
 	}
 
@@ -396,9 +383,9 @@ class WC_Itau_Shopline_Cripto {
 	 * @return string
 	 */
 	public function generate_generic_data( $data ) {
-		$_data = $this->algorithm( $data, $this->key );
-		$data  = $this->algorithm( $this->code . $_data, self::ITAU_KEY );
+		$_algorithm = $this->algorithm( $algorithm, $this->key );
+		$algorithm  = $this->algorithm( $this->code . $_algorithm, self::ITAU_KEY );
 
-		return $this->convert( $data );
+		return $this->convert( $algorithm );
 	}
 }
