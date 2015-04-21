@@ -362,6 +362,8 @@ class WC_Itau_Shopline_Cripto {
 			throw new Exception( __( 'Invalid type.', 'woocommerce-itau-shopline' ) );
 		}
 
+		$order_number = $this->fill_zeros( $order_number, 8 );
+
 		$_data = $this->algorithm( $order_number . $type, $this->key );
 		$data  = $this->algorithm( $this->code . $_data, self::ITAU_KEY );
 
