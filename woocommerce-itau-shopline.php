@@ -80,7 +80,7 @@ class WC_Itau_Shopline {
 	 * Includes.
 	 */
 	private function includes() {
-
+		include_once 'includes/wc-class-itau-shopline-cripto.php';
 	}
 
 	/**
