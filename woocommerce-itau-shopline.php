@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: WooCommerce Itaú Shopline
+ * Plugin Name: WooCommerce Itau Shopline
  * Plugin URI: https://github.com/claudiosmweb/woocommerce-itau-shopline
- * Description: Itaú Shopline payment gateway for WooCommerce.
+ * Description: Itau Shopline payment gateway for WooCommerce.
  * Author: Claudio Sanches
  * Author URI: https://claudiosmweb.com/
  * Version: 1.0.0
@@ -81,6 +81,7 @@ class WC_Itau_Shopline {
 	 */
 	private function includes() {
 		include_once 'includes/wc-class-itau-shopline-cripto.php';
+		include_once 'includes/wc-class-itau-shopline-gateway.php';
 	}
 
 	/**

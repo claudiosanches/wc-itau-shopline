@@ -6,7 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * WooCommerce Itau Shopline Cripto class.
  *
- * Inspired by https://github.com/gabrielrcouto/php-itaucripto - Gabriel Rodrigues Couto
+ * Inspired by https://github.com/gabrielrcouto/php-itaucripto - Gabriel Rodrigues Couto.
+ *
+ * @class   WC_Itau_Shopline_Cripto
+ * @version 1.0.0
+ * @author  Claudio Sanches
  */
 class WC_Itau_Shopline_Cripto {
 
@@ -283,15 +287,15 @@ class WC_Itau_Shopline_Cripto {
 		}
 
 		if ( 60 < strlen( $note_line1 ) ) {
-			throw new Exception( __( 'Invalid note line 1.', 'woocommerce-itau-shopline' ) );
+			throw new Exception( __( 'Invalid note line 1. Can not be more than 60 characters.', 'woocommerce-itau-shopline' ) );
 		}
 
 		if ( 60 < strlen( $note_line2 ) ) {
-			throw new Exception( __( 'Invalid note line 2.', 'woocommerce-itau-shopline' ) );
+			throw new Exception( __( 'Invalid note line 2. Can not be more than 60 characters.', 'woocommerce-itau-shopline' ) );
 		}
 
 		if ( 60 < strlen( $note_line3 ) ) {
-			throw new Exception( __( 'Invalid note line 3.', 'woocommerce-itau-shopline' ) );
+			throw new Exception( __( 'Invalid note line 3. Can not be more than 60 characters.', 'woocommerce-itau-shopline' ) );
 		}
 
 		// Fix zeros.
