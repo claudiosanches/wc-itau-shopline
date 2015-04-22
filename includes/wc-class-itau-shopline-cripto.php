@@ -344,7 +344,7 @@ class WC_Itau_Shopline_Cripto {
 	 *
 	 * @return string
 	 */
-	public function generate_request( $order_number, $type ) {
+	public function generate_request( $order_number, $type = '1' ) {
 		if ( ! in_array( $type, array( '0', '1' ) ) ) {
 			throw new Exception( __( 'Invalid type.', 'woocommerce-itau-shopline' ) );
 		}

@@ -16,13 +16,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 
 	/**
+	 * Itau Shopline API.
+	 *
+	 * @var WC_Itau_Shopline_API
+	 */
+	protected $api = null;
+
+	/**
 	 * Constructor for the gateway.
 	 */
 	public function __construct() {
-		$this->id                   = 'itau-shopline';
-		$this->icon                 = apply_filters( 'wc_itau_shopline_icon', plugins_url( 'assets/images/itau.png', plugin_dir_path( __FILE__ ) ) );
-		$this->method_title         = __( 'Itau Shopline', 'woocommerce-itau-shopline' );
-		$this->method_description   = __( 'Accept payments by credit card, online debit or banking billet using the Itau Shopline.', 'woocommerce-itau-shopline' );
+		$this->id                 = 'itau-shopline';
+		$this->icon               = apply_filters( 'wc_itau_shopline_icon', plugins_url( 'assets/images/itau.png', plugin_dir_path( __FILE__ ) ) );
+		$this->method_title       = __( 'Itau Shopline', 'woocommerce-itau-shopline' );
+		$this->method_description = __( 'Accept payments by credit card, online debit or banking billet using the Itau Shopline.', 'woocommerce-itau-shopline' );
 
 		// Load the form fields.
 		$this->init_form_fields();
@@ -40,11 +47,15 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 		$this->note_line2     = $this->get_option( 'note_line2' );
 		$this->note_line3     = $this->get_option( 'note_line3' );
 		$this->debug          = $this->get_option( 'debug' );
-
-		// Active logs.
-		if ( 'yes' == $this->debug ) {
-			$this->log = new WC_Logger();
-		}
+		$this->api            = new WC_Itau_Shopline_API(
+			$this->website_code,
+			$this->encryption_key,
+			$this->title,
+			$this->days_to_pay,
+			$this->note_line1,
+			$this->note_line2,
+			$this->note_line3
+		);
 
 		// Actions.
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );

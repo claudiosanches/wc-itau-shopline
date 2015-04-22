@@ -81,6 +81,7 @@ class WC_Itau_Shopline {
 	 */
 	private function includes() {
 		include_once 'includes/wc-class-itau-shopline-cripto.php';
+		include_once 'includes/wc-class-itau-shopline-api.php';
 		include_once 'includes/wc-class-itau-shopline-gateway.php';
 	}
 
