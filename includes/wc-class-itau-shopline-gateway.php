@@ -59,6 +59,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 
 		// Actions.
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
+		add_action( 'woocommerce_thankyou_' . $this->id, array( $this, 'thankyou_page' ) );
 	}
 
 	/**
@@ -203,9 +204,29 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	public function process_payment( $order_id ) {
 		$order = wc_get_order( $order_id );
 
+		// Mark as on-hold (we're awaiting the payment).
+		$order->update_status( 'on-hold', __( 'Itau Shopline: Awaiting payment.', 'woocommerce' ) );
+
+		// Remove cart.
+		WC()->cart->empty_cart();
+
+		// Return thankyou redirect.
 		return array(
-			'result' 	=> 'success',
-			'redirect'	=> $order->get_checkout_payment_url( true )
+			'result'   => 'success',
+			'redirect' => $this->get_return_url( $order )
 		);
+	}
+
+	/**
+	 * Thank you message.
+	 * Displays the Itau Shopline link.
+	 *
+	 * @param int $order_id
+	 */
+	public function thankyou_page( $order_id ) {
+		$order = wc_get_order( $order_id );
+		$hash  = $this->api->get_payment_hash( $order );
+		$url   = $this->api->get_shopline_url( $hash );
+
 	}
 }

@@ -136,28 +136,34 @@ class WC_Itau_Shopline_API {
 	/**
 	 * Get Shopline URL.
 	 *
+	 * @param  string $hash
+	 *
 	 * @return string
 	 */
-	public function get_shopline_url() {
-		return $this->shopline_url;
+	public function get_shopline_url( $hash ) {
+		return $this->shopline_url . '?DC=' . $hash;
 	}
 
 	/**
 	 * Get Ticket URL.
 	 *
+	 * @param  string $hash
+	 *
 	 * @return string
 	 */
-	public function get_ticket_url() {
-		return $this->ticket_url;
+	public function get_ticket_url( $hash ) {
+		return $this->ticket_url . '?DC=' . $hash;
 	}
 
 	/**
 	 * Get Request URL.
 	 *
+	 * @param  string $hash
+	 *
 	 * @return string
 	 */
-	public function get_request_url() {
-		return $this->request_url;
+	public function get_request_url( $hash ) {
+		return $this->request_url . '?DC=' . $hash;
 	}
 
 	/**
@@ -220,17 +226,6 @@ class WC_Itau_Shopline_API {
 	}
 
 	/**
-	 * Get expiry date.
-	 *
-	 * @return string
-	 */
-	protected function get_expiry_date() {
-		$days = absint( $this->days_to_pay );
-
-		return date( 'dmY', strtotime( '+' . $days . ' days' ) );
-	}
-
-	/**
 	 * Save expiry date in the database.
 	 *
 	 * @param int $order_id
@@ -240,6 +235,25 @@ class WC_Itau_Shopline_API {
 		$date = date( 'Ymd', strtotime( '+' . $days . ' days' ) );
 
 		update_post_meta( $order_id, '_wc_itau_shopline_expiry_date', $date );
+	}
+
+	/**
+	 * Get expiry date.
+	 *
+	 * @param  int $order_id
+	 *
+	 * @return string
+	 */
+	protected function get_expiry_date( $order_id ) {
+		$days = absint( $this->days_to_pay );
+		$date = get_post_meta( $order_id, '_wc_itau_shopline_expiry_date', true );
+
+		if ( '' == $date ) {
+			$date = date( 'Ymd', strtotime( '+' . $days . ' days' ) );
+			update_post_meta( $order_id, '_wc_itau_shopline_expiry_date', $date );
+		}
+
+		return date( 'dmY', strtotime( $date ) );
 	}
 
 	/**
@@ -268,7 +282,7 @@ class WC_Itau_Shopline_API {
 			'zipcode'       => $this->only_numbers( $order->billing_postcode ),
 			'city'          => $order->billing_city,
 			'state'         => $order->billing_state,
-			'expiry'        => $this->get_expiry_date(),
+			'expiry'        => $this->get_expiry_date( $order->id ),
 			'return_url'    => '', // Just for payment type notification and for websites over SSL.
 			'note_line1'    => $this->note_line1,
 			'note_line2'    => $this->note_line2,
@@ -276,7 +290,6 @@ class WC_Itau_Shopline_API {
 		);
 
 		$data = apply_filters( 'wc_itau_shopline_payment_data', $data );
-		$this->save_expiry_date( $order->id );
 
 		if ( 'yes' == $this->debug ) {
 			$this->log->add( $this->id, 'Hash data for order ' . $order->id . ': ' . print_r( $data, true ) );
@@ -318,7 +331,7 @@ class WC_Itau_Shopline_API {
 				'timeout'   => 60
 			);
 
-			$response = wp_remote_get( $this->get_request_url() . '?DC=' . $hash, $params );
+			$response = wp_remote_get( $this->get_request_url( $hash ), $params );
 
 			if ( is_wp_error( $response ) ) {
 				throw new Exception( 'WP_Error when requesting the payment details for order ' . $order_id . ': ' . $response->get_error_message() );
