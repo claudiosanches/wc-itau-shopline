@@ -95,6 +95,19 @@ class WC_Itau_Shopline {
 	}
 
 	/**
+	 * Get payment url.
+	 *
+	 * @param  string $order_key
+	 *
+	 * @return string
+	 */
+	public static function get_payment_url( $order_key ) {
+		$url = WC()->api_request_url( 'WC_Itau_Shopline_Gateway' );
+
+		return add_query_arg( array( 'key' => $order_key ), $url );
+	}
+
+	/**
 	 * Add the gateway to WooCommerce.
 	 *
 	 * @param  array $methods WooCommerce payment methods.

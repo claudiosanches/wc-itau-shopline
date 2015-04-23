@@ -58,6 +58,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 		);
 
 		// Actions.
+		add_action( 'woocommerce_api_wc_itau_shopline_gateway', array( $this, 'payment_redirect' ) );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 		add_action( 'woocommerce_thankyou_' . $this->id, array( $this, 'thankyou_page' ) );
 	}
@@ -218,6 +219,34 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	}
 
 	/**
+	 * Payment redirect.
+	 */
+	public function payment_redirect() {
+		@ob_start();
+
+		if ( isset( $_GET['key'] ) ) {
+			$order_key = wc_clean( $_GET['key'] );
+			$order_id  = wc_get_order_id_by_order_key( $order_key );
+			$order     = wc_get_order( $order_id );
+
+			if ( is_object( $order ) && $this->id === $order->payment_method ) {
+				if ( 'on-hold' !== $order->status ) {
+					$message = sprintf( __( 'You can no longer make the payment for order %s.', 'woocommerce' ), $order->get_order_number() );
+					wp_die( $message, __( 'Payment method expired', 'woocommerce' ), array( 'response' => 200 ) );
+				}
+
+				$hash  = $this->api->get_payment_hash( $order );
+				$url   = $this->api->get_shopline_url( $hash );
+
+				wp_redirect( esc_url_raw( $url ) );
+				exit;
+			}
+		}
+
+		wp_die( __( 'Invalid request!', 'woocommerce' ), __( 'Invalid request!', 'woocommerce' ), array( 'response' => 401 ) );
+	}
+
+	/**
 	 * Thank you message.
 	 * Displays the Itau Shopline link.
 	 *
@@ -225,12 +254,11 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	 */
 	public function thankyou_page( $order_id ) {
 		$order = wc_get_order( $order_id );
-		$hash  = $this->api->get_payment_hash( $order );
 
 		woocommerce_get_template(
 			'payment-form.php',
 			array(
-				'url' => $this->api->get_shopline_url( $hash )
+				'url' => WC_Itau_Shopline::get_payment_url( $order->order_key )
 			),
 			'woocommerce/itau-shopline/',
 			WC_Iugu::get_templates_path()
