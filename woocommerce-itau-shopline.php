@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'WC_Itau_Shopline' ) ) :
 
 /**
- * WooCommerce Itaú Shopline main class.
+ * WooCommerce Itau Shopline main class.
  */
 class WC_Itau_Shopline {
 
@@ -47,7 +47,7 @@ class WC_Itau_Shopline {
 		if ( class_exists( 'WC_Payment_Gateway' ) && defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.2', '>=' ) ) {
 			$this->includes();
 
-			// Hook to add Itaú Shopline Gateway to WooCommerce.
+			// Hook to add Itau Shopline Gateway to WooCommerce.
 			add_filter( 'woocommerce_payment_gateways', array( $this, 'add_gateway' ) );
 			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
 		} else {
@@ -86,11 +86,20 @@ class WC_Itau_Shopline {
 	}
 
 	/**
+	 * Get templates path.
+	 *
+	 * @return string
+	 */
+	public static function get_templates_path() {
+		return plugin_dir_path( __FILE__ ) . 'templates/';
+	}
+
+	/**
 	 * Add the gateway to WooCommerce.
 	 *
 	 * @param  array $methods WooCommerce payment methods.
 	 *
-	 * @return array          Payment methods with Itaú Shopline.
+	 * @return array          Payment methods with Itau Shopline.
 	 */
 	public function add_gateway( $methods ) {
 		$methods[] = 'WC_Itau_Shopline_Gateway';

@@ -226,7 +226,14 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	public function thankyou_page( $order_id ) {
 		$order = wc_get_order( $order_id );
 		$hash  = $this->api->get_payment_hash( $order );
-		$url   = $this->api->get_shopline_url( $hash );
 
+		woocommerce_get_template(
+			'payment-form.php',
+			array(
+				'url' => $this->api->get_shopline_url( $hash )
+			),
+			'woocommerce/itau-shopline/',
+			WC_Iugu::get_templates_path()
+		);
 	}
 }
