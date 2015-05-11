@@ -318,7 +318,7 @@ class WC_Itau_Shopline_API {
 	 *
 	 * @return array
 	 */
-	public function get_payment_details( $order_id ) {
+	protected function get_payment_details( $order_id ) {
 		if ( 'yes' == $this->debug ) {
 			$this->log->add( $this->id, 'Requesting payment details for order ' . $order_id );
 		}
@@ -363,5 +363,34 @@ class WC_Itau_Shopline_API {
 
 			return array();
 		}
+	}
+
+	/**
+	 * Process order status.
+	 *
+	 * @param  int $order_id
+	 *
+	 * @return bool
+	 */
+	public function process_order_status( $order_id ) {
+		if ( 'yes' == $this->debug ) {
+			$this->log->add( $this->id, 'Processing payment status for order ' . $order_id );
+		}
+
+		$payment_details = $this->get_payment_details( $order_id );
+
+		if ( ! $payment_details ) {
+			if ( 'yes' == $this->debug ) {
+				$this->log->add( $this->id, 'Order status change failed for order ' . $order_id );
+			}
+
+			return false;
+		}
+
+		if ( '00' == $payment_details['payment_type'] ) {
+
+		}
+
+		return true;
 	}
 }

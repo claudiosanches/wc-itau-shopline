@@ -54,7 +54,8 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 			$this->days_to_pay,
 			$this->note_line1,
 			$this->note_line2,
-			$this->note_line3
+			$this->note_line3,
+			$this->debug
 		);
 
 		// Actions.

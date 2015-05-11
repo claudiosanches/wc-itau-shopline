@@ -82,6 +82,7 @@ class WC_Itau_Shopline {
 	private function includes() {
 		include_once 'includes/wc-class-itau-shopline-cripto.php';
 		include_once 'includes/wc-class-itau-shopline-api.php';
+		include_once 'includes/wc-class-itau-shopline-sounder.php';
 		include_once 'includes/wc-class-itau-shopline-gateway.php';
 	}
 
@@ -141,6 +142,12 @@ class WC_Itau_Shopline {
 		return array_merge( $plugin_links, $links );
 	}
 }
+
+// Sounder schedule.
+register_activation_hook( __FILE__, array( 'WC_Itau_Shopline_Sounder', 'schedule_event' ) );
+
+// Remove sounder schedule.
+register_deactivation_hook( __FILE__, array( 'WC_Itau_Shopline_Sounder', 'clear_scheduled_event' ) );
 
 add_action( 'plugins_loaded', array( 'WC_Itau_Shopline', 'get_instance' ) );
 
