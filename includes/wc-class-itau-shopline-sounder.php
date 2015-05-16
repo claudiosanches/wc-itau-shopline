@@ -73,7 +73,7 @@ class WC_Itau_Shopline_Sounder {
 	/**
 	 * Process order status.
 	 *
-	 * @param  int $order_id
+	 * @param int $order_id
 	 */
 	protected static function process_order_status( $order_id ) {
 		$order_id = intval( $order_id );
