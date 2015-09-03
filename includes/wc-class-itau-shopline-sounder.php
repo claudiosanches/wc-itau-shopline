@@ -16,8 +16,8 @@ class WC_Itau_Shopline_Sounder {
 	 * Initialize sounder actions
 	 */
 	public function __construct() {
-		add_filter( 'cron_schedules', array( $this, 'sounder_schedule' ) );
-		add_action( 'wcitaushoplinesounder', array( $this, 'sounder' ) );
+		add_filter( 'cron_schedules', array( __CLASS__, 'sounder_schedule' ) );
+		add_action( 'wc_itau_shopline_sounder', array( $this, 'sounder' ) );
 	}
 
 	/**
@@ -27,7 +27,7 @@ class WC_Itau_Shopline_Sounder {
 	 *
 	 * @return array
 	 */
-	public function sounder_schedule( $schedules ) {
+	public static function sounder_schedule( $schedules ) {
 		$schedules['itau_shopline'] = array(
 			'interval' => 10800,
 			'display'  => __( 'Itau Shoptine - Every 3 hours', 'woocommerce-itau-shopline' )
@@ -40,14 +40,14 @@ class WC_Itau_Shopline_Sounder {
 	 * Schedule event.
 	 */
 	public static function schedule_event() {
-		wp_schedule_event( time(), 'itau_shopline', 'wcitaushoplinesounder' );
+		wp_schedule_event( current_time( 'timestamp' ), 'itau_shopline', 'wc_itau_shopline_sounder' );
 	}
 
 	/**
 	 * Clear scheduled event.
 	 */
 	public static function clear_scheduled_event() {
-		wp_clear_scheduled_hook( 'wcitaushoplinesounder' );
+		wp_clear_scheduled_hook( 'wc_itau_shopline_sounder' );
 	}
 
 	/**
@@ -93,3 +93,5 @@ class WC_Itau_Shopline_Sounder {
 		}
 	}
 }
+
+new WC_Itau_Shopline_Sounder();

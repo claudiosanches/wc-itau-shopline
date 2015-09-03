@@ -213,6 +213,9 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 		// Remove cart.
 		WC()->cart->empty_cart();
 
+		// Set the expiry date.
+		$this->api->save_expiry_time( $order_id );
+
 		// Return thankyou redirect.
 		return array(
 			'result'   => 'success',

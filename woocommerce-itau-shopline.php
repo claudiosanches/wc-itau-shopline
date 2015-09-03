@@ -17,6 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'WC_Itau_Shopline' ) ) :
 
+// Load plugin classes
+include_once 'includes/wc-class-itau-shopline-cripto.php';
+include_once 'includes/wc-class-itau-shopline-api.php';
+include_once 'includes/wc-class-itau-shopline-sounder.php';
+
 /**
  * WooCommerce Itau Shopline main class.
  */
@@ -80,9 +85,6 @@ class WC_Itau_Shopline {
 	 * Includes.
 	 */
 	private function includes() {
-		include_once 'includes/wc-class-itau-shopline-cripto.php';
-		include_once 'includes/wc-class-itau-shopline-api.php';
-		include_once 'includes/wc-class-itau-shopline-sounder.php';
 		include_once 'includes/wc-class-itau-shopline-gateway.php';
 	}
 

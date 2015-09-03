@@ -276,13 +276,13 @@ class WC_Itau_Shopline_API {
 	}
 
 	/**
-	 * Save expiry date in the database.
+	 * Save expiry time in the database.
 	 *
 	 * @param  int $order_id
 	 *
 	 * @return int
 	 */
-	protected function save_expiry_date( $order_id ) {
+	public function save_expiry_time( $order_id ) {
 		$days   = absint( $this->days_to_pay );
 		$now    = strtotime( current_time( 'mysql' ) );
 		$expiry = strtotime( '+' . $days . ' days', $now );
@@ -303,10 +303,10 @@ class WC_Itau_Shopline_API {
 		$time = get_post_meta( $order_id, '_wc_itau_shopline_expiry_time', true );
 
 		if ( '' == $time ) {
-			$time = $this->save_expiry_date( $order_id );
+			$time = $this->save_expiry_time( $order_id );
 		}
 
-		return date( 'dmY', strtotime( $date ) );
+		return date( 'dmY', $time );
 	}
 
 	/**
@@ -387,7 +387,7 @@ class WC_Itau_Shopline_API {
 			$response = wp_remote_get( $this->get_request_url( $hash ), $params );
 
 			if ( 'yes' == $this->debug ) {
-				$this->log->add( $this->id, 'Request data of payment details for order ' . $order_id . ':' . print_r( $response, true ) );
+				$this->log->add( $this->id, 'Request data of payment details for order ' . $order_id . ': ' . print_r( $response['body'], true ) );
 			}
 
 			if ( is_wp_error( $response ) ) {
@@ -396,7 +396,7 @@ class WC_Itau_Shopline_API {
 			$details = array();
 			$data    = $this->safe_load_xml( $response['body'], LIBXML_NOCDATA );
 
-			if ( ! isset( $data->PARAMETER->PARAM[3] ) || isset( $data->PARAMETER->PARAM[4] ) || ! is_object( $data->PARAMETER->PARAM[3] ) || ! is_object( $data->PARAMETER->PARAM[4] ) ) {
+			if ( ! isset( $data->PARAMETER->PARAM[3] ) || ! isset( $data->PARAMETER->PARAM[4] ) || ! is_object( $data->PARAMETER->PARAM[3] ) || ! is_object( $data->PARAMETER->PARAM[4] ) ) {
 				throw new Exception( 'Invalid returned data for order ' . $order_id . ': ' . print_r( $data, true ) );
 			}
 
@@ -409,7 +409,7 @@ class WC_Itau_Shopline_API {
 			);
 
 			if ( 'yes' == $this->debug ) {
-				$this->log->add( $this->id, 'Payment details for order ' . $order_id . ' requested successfully:' . print_r( $details, true ) );
+				$this->log->add( $this->id, 'Payment details for order ' . $order_id . ' requested successfully: ' . print_r( $details, true ) );
 			}
 
 			return $details;
@@ -460,9 +460,9 @@ class WC_Itau_Shopline_API {
 
 			if ( $limit_time < $now ) {
 				$order->update_status( 'cancelled', __( 'Itau Shopline: Order canceled because customers not selected a form of payment yet.', 'woocommerce-itau-shopline' ) );
-			}
 
-			return false;
+				return false;
+			}
 		}
 
 		$return = false;
