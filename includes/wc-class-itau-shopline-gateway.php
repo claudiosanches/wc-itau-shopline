@@ -285,7 +285,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 			wc_get_template(
 				'emails/plain-instructions.php',
 				array(
-					'pdf' => $data['pdf']
+					'url' => $url
 				),
 				'woocommerce/itau-shopline/',
 				WC_Itau_Shopline::get_templates_path()
@@ -294,7 +294,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 			wc_get_template(
 				'emails/html-instructions.php',
 				array(
-					'pdf' => $data['pdf']
+					'url' => $url
 				),
 				'woocommerce/itau-shopline/',
 				WC_Itau_Shopline::get_templates_path()
