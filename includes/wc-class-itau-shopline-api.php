@@ -474,7 +474,7 @@ class WC_Itau_Shopline_API {
 				if ( ! in_array( $order->get_status(), array( 'processing', 'completed' ) ) ) {
 					$payment_type_name = $this->get_payment_type_name( $payment_details['payment_type'] );
 
-					$order->add_order_note( sprintf( __( 'Itau Shopline: Payment approved by .', 'woocommerce-itau-shopline' ), $payment_type_name ) );
+					$order->add_order_note( sprintf( __( 'Itau Shopline: Payment approved using %s.', 'woocommerce-itau-shopline' ), $payment_type_name ) );
 				}
 
 				// Changing the order for processing and reduces the stock.
