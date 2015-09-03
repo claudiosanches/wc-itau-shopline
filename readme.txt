@@ -2,26 +2,39 @@
 Contributors: claudiosanches
 Tags: woocommerce, itau, shopline, payment
 Requires at least: 4.0
-Tested up to: 4.2.2
+Tested up to: 4.3
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Plugin short description
+Itau Shopline gateway for WooCommerce
 
 == Description ==
 
-Plugin description
+This plugin adds Itau Shopline to WooCommerce.
+
+Please notice that WooCommerce must be installed and active.
 
 == Installation ==
 
 == Frequently Asked Questions ==
 
+= What is the plugin license? =
+
+* This plugin is released under a GPL license.
+
+= What is needed to use this plugin? =
+
+* WooCommerce version 2.3 or latter installed and active.
+* One account on [Itau Shopline](http://www.itaushopline.com.br/home_shopline.asp).
+
 == Screenshots ==
+
+Coming soon :)
 
 == Changelog ==
 
-= 1.0.0 - 2015/xx/xx =
+= 1.0.0 - 2015/09/03 =
 
 * Initial version.
 
