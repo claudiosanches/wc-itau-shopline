@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="woocommerce-message">
 	<span>
-		<a class="button" href="<?php echo esc_url( $url ); ?>" target="_blank" style="display: block !important; visibility: visible !important;"><?php _e( 'Make payment', 'iugu-woocommerce' ); ?></a>
+		<a class="button" href="<?php echo esc_url( $url ); ?>" target="_blank" style="display: block !important; visibility: visible !important;"><?php _e( 'Make payment', 'woocommerce-itau-shopline' ); ?></a>
 		<?php _e( 'Please click in the following button to make your payment.', 'woocommerce-itau-shopline' ); ?><br />
 		<?php _e( 'After we receive the payment confirmation, your order will be processed.', 'woocommerce-itau-shopline' ); ?>
 	</span>

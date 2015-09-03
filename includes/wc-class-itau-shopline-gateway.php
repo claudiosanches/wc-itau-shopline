@@ -275,7 +275,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	 * @param  bool   $plain_text    Plain text or HTML.
 	 */
 	public function email_instructions( $order, $sent_to_admin, $plain_text = false ) {
-		if ( $sent_to_admin || 'on-hold' !== $order->status || $this->id !== $order->payment_method ) {
+		if ( $sent_to_admin || 'on-hold' !== $order->get_status() || $this->id !== $order->payment_method ) {
 			return;
 		}
 

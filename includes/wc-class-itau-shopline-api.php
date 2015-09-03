@@ -167,6 +167,23 @@ class WC_Itau_Shopline_API {
 	}
 
 	/**
+	 * Get payment type name.
+	 *
+	 * @param  string $type
+	 *
+	 * @return string
+	 */
+	protected function get_payment_type_name( $type ) {
+		$types = array(
+			'01' => __( 'direct debit or financing', 'woocommerce-itau-shopline' ),
+			'02' => __( 'banking ticket', 'woocommerce-itau-shopline' ),
+			'03' => __( 'credit card', 'woocommerce-itau-shopline' ),
+		);
+
+		return isset( $types[ $type ] ) ? $types[ $type ] : '';
+	}
+
+	/**
 	 * Only numbers.
 	 *
 	 * @param  string|int $string
@@ -204,14 +221,6 @@ class WC_Itau_Shopline_API {
 		}
 
 		if ( ! $return ) {
-			return false;
-		}
-
-		if ( isset( $dom->doctype ) ) {
-			if ( 'yes' == $this->debug ) {
-				$this->log->add( $this->id, 'Unsafe DOCTYPE Detected while XML parsing' );
-			}
-
 			return false;
 		}
 
@@ -269,13 +278,18 @@ class WC_Itau_Shopline_API {
 	/**
 	 * Save expiry date in the database.
 	 *
-	 * @param int $order_id
+	 * @param  int $order_id
+	 *
+	 * @return int
 	 */
 	protected function save_expiry_date( $order_id ) {
-		$days = absint( $this->days_to_pay );
-		$date = date( 'Ymd', strtotime( '+' . $days . ' days' ) );
+		$days   = absint( $this->days_to_pay );
+		$now    = strtotime( current_time( 'mysql' ) );
+		$expiry = strtotime( '+' . $days . ' days', $now );
 
-		update_post_meta( $order_id, '_wc_itau_shopline_expiry_date', $date );
+		update_post_meta( $order_id, '_wc_itau_shopline_expiry_time', $expiry );
+
+		return $expiry;
 	}
 
 	/**
@@ -286,12 +300,10 @@ class WC_Itau_Shopline_API {
 	 * @return string
 	 */
 	protected function get_expiry_date( $order_id ) {
-		$days = absint( $this->days_to_pay );
-		$date = get_post_meta( $order_id, '_wc_itau_shopline_expiry_date', true );
+		$time = get_post_meta( $order_id, '_wc_itau_shopline_expiry_time', true );
 
-		if ( '' == $date ) {
-			$date = date( 'Ymd', strtotime( '+' . $days . ' days' ) );
-			update_post_meta( $order_id, '_wc_itau_shopline_expiry_date', $date );
+		if ( '' == $time ) {
+			$time = $this->save_expiry_date( $order_id );
 		}
 
 		return date( 'dmY', strtotime( $date ) );
@@ -374,6 +386,10 @@ class WC_Itau_Shopline_API {
 
 			$response = wp_remote_get( $this->get_request_url( $hash ), $params );
 
+			if ( 'yes' == $this->debug ) {
+				$this->log->add( $this->id, 'Request data of payment details for order ' . $order_id . ':' . print_r( $response, true ) );
+			}
+
 			if ( is_wp_error( $response ) ) {
 				throw new Exception( 'WP_Error when requesting the payment details for order ' . $order_id . ': ' . $response->get_error_message() );
 			}
@@ -428,10 +444,54 @@ class WC_Itau_Shopline_API {
 			return false;
 		}
 
-		if ( '00' == $payment_details['payment_type'] ) {
+		$order = wc_get_order( $order_id );
+		$now   = strtotime( current_time( 'mysql' ) );
 
+		// Cancel order if expired.
+		if ( $order->wc_itau_shopline_expiry_time < $now && 'on-hold' === $order->get_status() ) {
+			$order->update_status( 'cancelled', __( 'Itau Shopline: Order expired for lack of pay.', 'woocommerce-itau-shopline' ) );
+
+			return false;
 		}
 
-		return true;
+		// Cancel order if the customer does not selected any payment type in one hour.
+		if ( '00' == $payment_details['payment_type'] ) {
+			$limit_time = strtotime( '+60 minutes', strtotime( $order->order_date ) );
+
+			if ( $limit_time < $now ) {
+				$order->update_status( 'cancelled', __( 'Itau Shopline: Order canceled because customers not selected a form of payment yet.', 'woocommerce-itau-shopline' ) );
+			}
+
+			return false;
+		}
+
+		$return = false;
+
+		// Process the order status.
+		switch ( $payment_details['status'] ) {
+			case '00' :
+			case '05' :
+				if ( ! in_array( $order->get_status(), array( 'processing', 'completed' ) ) ) {
+					$payment_type_name = $this->get_payment_type_name( $payment_details['payment_type'] );
+
+					$order->add_order_note( sprintf( __( 'Itau Shopline: Payment approved by .', 'woocommerce-itau-shopline' ), $payment_type_name ) );
+				}
+
+				// Changing the order for processing and reduces the stock.
+				$order->payment_complete();
+
+				$return = true;
+
+				break;
+			case '03' :
+				$order->update_status( 'cancelled', __( 'Itau Shopline: Order expired for lack of pay.', 'woocommerce-itau-shopline' ) );
+				break;
+
+			default :
+				// Do nothing!
+				break;
+		}
+
+		return $return;
 	}
 }

@@ -16,18 +16,18 @@ class WC_Itau_Shopline_Sounder {
 	 * Initialize sounder actions
 	 */
 	public function __construct() {
-		add_filter( 'cron_schedules', array( $this, 'custom_schedule' ) );
+		add_filter( 'cron_schedules', array( $this, 'sounder_schedule' ) );
 		add_action( 'wcitaushoplinesounder', array( $this, 'sounder' ) );
 	}
 
 	/**
-	 * Create custom schendule.
+	 * Create sounder schendule.
 	 *
 	 * @param  array $schedules
 	 *
 	 * @return array
 	 */
-	public function custom_schedule( $schedules ) {
+	public function sounder_schedule( $schedules ) {
 		$schedules['itau_shopline'] = array(
 			'interval' => 10800,
 			'display'  => __( 'Itau Shoptine - Every 3 hours', 'woocommerce-itau-shopline' )
@@ -51,32 +51,11 @@ class WC_Itau_Shopline_Sounder {
 	}
 
 	/**
-	 * Sounder.
-	 */
-	public static function sounder() {
-		global $wpdb;
-
-		$orders = $wpdb->get_results( "
-			SELECT posts.ID
-			FROM $wpdb->posts AS posts
-			LEFT JOIN $wpdb->postmeta AS postmeta ON postmeta.post_id = posts.ID
-			WHERE postmeta.meta_key = '_payment_method'
-			AND postmeta.meta_value = 'itau-shopline'
-			AND posts.post_status = 'wc-on-hold'
-		 " );
-
-		foreach ( $orders as $_order ) {
-			self::process_order_status( $_order->ID );
-		}
-	}
-
-	/**
-	 * Process order status.
+	 * Get API instance.
 	 *
-	 * @param int $order_id
+	 * @return WC_Itau_Shopline_API
 	 */
-	protected static function process_order_status( $order_id ) {
-		$order_id = intval( $order_id );
+	protected static function get_api_instance() {
 		$settings = get_option( 'woocommerce_itau-shopline_settings', array() );
 		$api      = new WC_Itau_Shopline_API(
 			$settings['website_code'],
@@ -89,6 +68,28 @@ class WC_Itau_Shopline_Sounder {
 			$settings['debug']
 		);
 
-		$processed_status = $api->process_order_status( $order_id );
+		return $api;
+	}
+
+	/**
+	 * Sounder.
+	 */
+	public static function sounder() {
+		global $wpdb;
+
+		$api    = self::get_api_instance();
+		$orders = $wpdb->get_results( "
+			SELECT posts.ID
+			FROM $wpdb->posts AS posts
+			LEFT JOIN $wpdb->postmeta AS postmeta ON postmeta.post_id = posts.ID
+			WHERE postmeta.meta_key = '_payment_method'
+			AND postmeta.meta_value = 'itau-shopline'
+			AND posts.post_status = 'wc-on-hold'
+		 " );
+
+		// Process the order status for on-hold orders.
+		foreach ( $orders as $_order ) {
+			$api->process_order_status( intval( $_order->ID ) );
+		}
 	}
 }
