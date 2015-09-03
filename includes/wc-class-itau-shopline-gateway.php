@@ -257,12 +257,12 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 		$order = wc_get_order( $order_id );
 
 		woocommerce_get_template(
-			'payment-form.php',
+			'payment-instructions.php',
 			array(
 				'url' => WC_Itau_Shopline::get_payment_url( $order->order_key )
 			),
 			'woocommerce/itau-shopline/',
-			WC_Iugu::get_templates_path()
+			WC_Itau_Shopline::get_templates_path()
 		);
 	}
 }
