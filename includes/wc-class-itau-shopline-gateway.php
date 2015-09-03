@@ -62,6 +62,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 		add_action( 'woocommerce_api_wc_itau_shopline_gateway', array( $this, 'payment_redirect' ) );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 		add_action( 'woocommerce_thankyou_' . $this->id, array( $this, 'thankyou_page' ) );
+		add_action( 'woocommerce_email_after_order_table', array( $this, 'email_instructions' ), 10, 3 );
 	}
 
 	/**
@@ -256,7 +257,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	public function thankyou_page( $order_id ) {
 		$order = wc_get_order( $order_id );
 
-		woocommerce_get_template(
+		wc_get_template(
 			'payment-instructions.php',
 			array(
 				'url' => WC_Itau_Shopline::get_payment_url( $order->order_key )
@@ -264,5 +265,40 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 			'woocommerce/itau-shopline/',
 			WC_Itau_Shopline::get_templates_path()
 		);
+	}
+
+	/**
+	 * Add payment instructions to order email.
+	 *
+	 * @param  object $order         Order object.
+	 * @param  bool   $sent_to_admin Send to admin.
+	 * @param  bool   $plain_text    Plain text or HTML.
+	 */
+	public function email_instructions( $order, $sent_to_admin, $plain_text = false ) {
+		if ( $sent_to_admin || 'on-hold' !== $order->status || $this->id !== $order->payment_method ) {
+			return;
+		}
+
+		$url = WC_Itau_Shopline::get_payment_url( $order->order_key );
+
+		if ( $plain_text ) {
+			wc_get_template(
+				'emails/plain-instructions.php',
+				array(
+					'pdf' => $data['pdf']
+				),
+				'woocommerce/itau-shopline/',
+				WC_Itau_Shopline::get_templates_path()
+			);
+		} else {
+			wc_get_template(
+				'emails/html-instructions.php',
+				array(
+					'pdf' => $data['pdf']
+				),
+				'woocommerce/itau-shopline/',
+				WC_Itau_Shopline::get_templates_path()
+			);
+		}
 	}
 }
