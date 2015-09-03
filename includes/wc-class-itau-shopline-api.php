@@ -178,6 +178,47 @@ class WC_Itau_Shopline_API {
 	}
 
 	/**
+	 * Safe load XML.
+	 *
+	 * @param  string $source
+	 * @param  int    $options
+	 *
+	 * @return SimpleXMLElement|bool
+	 */
+	protected function safe_load_xml( $source, $options = 0 ) {
+		$old = null;
+
+		if ( '<' !== substr( $source, 0, 1 ) ) {
+			return false;
+		}
+
+		if ( function_exists( 'libxml_disable_entity_loader' ) ) {
+			$old = libxml_disable_entity_loader( true );
+		}
+
+		$dom    = new DOMDocument();
+		$return = $dom->loadXML( $source, $options );
+
+		if ( ! is_null( $old ) ) {
+			libxml_disable_entity_loader( $old );
+		}
+
+		if ( ! $return ) {
+			return false;
+		}
+
+		if ( isset( $dom->doctype ) ) {
+			if ( 'yes' == $this->debug ) {
+				$this->log->add( $this->id, 'Unsafe DOCTYPE Detected while XML parsing' );
+			}
+
+			return false;
+		}
+
+		return simplexml_import_dom( $dom );
+	}
+
+	/**
 	 * Get CPF or CNPJ.
 	 *
 	 * @param  WC_Order $order
@@ -337,7 +378,7 @@ class WC_Itau_Shopline_API {
 				throw new Exception( 'WP_Error when requesting the payment details for order ' . $order_id . ': ' . $response->get_error_message() );
 			}
 			$details = array();
-			$data    = new SimpleXmlElement( $response['body'], LIBXML_NOCDATA );
+			$data    = $this->safe_load_xml( $response['body'], LIBXML_NOCDATA );
 
 			if ( ! isset( $data->PARAMETER->PARAM[3] ) || isset( $data->PARAMETER->PARAM[4] ) || ! is_object( $data->PARAMETER->PARAM[3] ) || ! is_object( $data->PARAMETER->PARAM[4] ) ) {
 				throw new Exception( 'Invalid returned data for order ' . $order_id . ': ' . print_r( $data, true ) );
