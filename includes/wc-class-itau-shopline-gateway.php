@@ -208,7 +208,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 		$order = wc_get_order( $order_id );
 
 		// Mark as on-hold (we're awaiting the payment).
-		$order->update_status( 'on-hold', __( 'Itau Shopline: Awaiting payment.', 'woocommerce' ) );
+		$order->update_status( 'on-hold', __( 'Itau Shopline: Awaiting payment.', 'woocommerce-itau-shopline' ) );
 
 		// Remove cart.
 		WC()->cart->empty_cart();
@@ -236,8 +236,8 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 
 			if ( is_object( $order ) && $this->id === $order->payment_method ) {
 				if ( 'on-hold' !== $order->status ) {
-					$message = sprintf( __( 'You can no longer make the payment for order %s.', 'woocommerce' ), $order->get_order_number() );
-					wp_die( $message, __( 'Payment method expired', 'woocommerce' ), array( 'response' => 200 ) );
+					$message = sprintf( __( 'You can no longer make the payment for order %s.', 'woocommerce-itau-shopline' ), $order->get_order_number() );
+					wp_die( $message, __( 'Payment method expired', 'woocommerce-itau-shopline' ), array( 'response' => 200 ) );
 				}
 
 				$hash  = $this->api->get_payment_hash( $order );
@@ -248,7 +248,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 			}
 		}
 
-		wp_die( __( 'Invalid request!', 'woocommerce' ), __( 'Invalid request!', 'woocommerce' ), array( 'response' => 401 ) );
+		wp_die( __( 'Invalid request!', 'woocommerce-itau-shopline' ), __( 'Invalid request!', 'woocommerce-itau-shopline' ), array( 'response' => 401 ) );
 	}
 
 	/**
