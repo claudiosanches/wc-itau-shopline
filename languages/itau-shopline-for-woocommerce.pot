@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Itau Shopline 1.0.0\n"
+"Project-Id-Version: Itau Shopline for WooCommerce 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/plugins/woocommerce-domination/\n"
-"POT-Creation-Date: 2015-09-03 09:09:08+00:00\n"
+"POT-Creation-Date: 2015-09-04 03:25:32+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "WooCommerce Itau Shopline"
+msgid "Itau Shopline for WooCommerce"
 msgstr ""
 
 #: includes/views/html-admin-page.php:23
@@ -36,7 +36,7 @@ msgid "Currency <code>%s</code> is not supported. Works only with Brazilian Real
 msgstr ""
 
 #: includes/views/html-notice-woocommerce-missing.php:20
-msgid "WooCommerce Itau Shopline Disabled"
+msgid "Itau Shopline for WooCommerce Disabled"
 msgstr ""
 
 #: includes/views/html-notice-woocommerce-missing.php:20
@@ -254,6 +254,10 @@ msgstr ""
 msgid "Itau Shoptine - Every 3 hours"
 msgstr ""
 
+#: itau-shopline-for-woocommerce.php:142
+msgid "Settings"
+msgstr ""
+
 #: templates/emails/html-instructions.php:15
 #: templates/emails/plain-instructions.php:14
 msgid "Payment"
@@ -282,12 +286,8 @@ msgstr ""
 msgid "Please click in the following button to make your payment."
 msgstr ""
 
-#: woocommerce-itau-shopline.php:142
-msgid "Settings"
-msgstr ""
-
 #. Plugin URI of the plugin/theme
-msgid "https://github.com/claudiosmweb/woocommerce-itau-shopline"
+msgid "https://github.com/claudiosmweb/itau-shopline-for-woocommerce"
 msgstr ""
 
 #. Description of the plugin/theme

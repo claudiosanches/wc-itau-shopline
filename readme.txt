@@ -1,4 +1,4 @@
-=== WooCommerce Itau Shopline ===
+=== Itau Shopline for WooCommerce ===
 Contributors: claudiosanches
 Tags: woocommerce, itau, shopline, payment
 Requires at least: 4.0
@@ -46,8 +46,8 @@ Coming soon :)
 
 == License ==
 
-WooCommerce Itau Shopline is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+Itau Shopline for WooCommerce is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-WooCommerce Itau Shopline is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+Itau Shopline for WooCommerce is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with WooCommerce Itau Shopline. If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License along with Itau Shopline for WooCommerce. If not, see <http://www.gnu.org/licenses/>.

@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WooCommerce Itau Shopline Sounder class.
+ * Itau Shopline for WooCommerce Sounder class.
  *
  * @class   WC_Itau_Shopline_Sounder
  * @version 1.0.0
@@ -30,7 +30,7 @@ class WC_Itau_Shopline_Sounder {
 	public static function sounder_schedule( $schedules ) {
 		$schedules['itau_shopline'] = array(
 			'interval' => 10800,
-			'display'  => __( 'Itau Shoptine - Every 3 hours', 'woocommerce-itau-shopline' )
+			'display'  => __( 'Itau Shoptine - Every 3 hours', 'itau-shopline-for-woocommerce' )
 		);
 
 		return $schedules;

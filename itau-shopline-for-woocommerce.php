@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name: WooCommerce Itau Shopline
- * Plugin URI: https://github.com/claudiosmweb/woocommerce-itau-shopline
+ * Plugin Name: Itau Shopline for WooCommerce
+ * Plugin URI: https://github.com/claudiosmweb/itau-shopline-for-woocommerce
  * Description: Itau Shopline payment gateway for WooCommerce.
  * Author: Claudio Sanches
  * Author URI: https://claudiosmweb.com/
  * Version: 1.0.0
  * License: GPLv2 or later
- * Text Domain: woocommerce-itau-shopline
+ * Text Domain: itau-shopline-for-woocommerce
  * Domain Path: languages/
  */
 
@@ -23,7 +23,7 @@ include_once 'includes/wc-class-itau-shopline-api.php';
 include_once 'includes/wc-class-itau-shopline-sounder.php';
 
 /**
- * WooCommerce Itau Shopline main class.
+ * Itau Shopline for WooCommerce main class.
  */
 class WC_Itau_Shopline {
 
@@ -78,7 +78,7 @@ class WC_Itau_Shopline {
 	 * Load the plugin text domain for translation.
 	 */
 	public function load_plugin_textdomain() {
-		load_plugin_textdomain( 'woocommerce-itau-shopline', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'itau-shopline-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
@@ -139,7 +139,7 @@ class WC_Itau_Shopline {
 	 */
 	public function plugin_action_links( $links ) {
 		$plugin_links   = array();
-		$plugin_links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=wc_itau_shopline_gateway' ) ) . '">' . __( 'Settings', 'woocommerce-itau-shopline' ) . '</a>';
+		$plugin_links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=wc_itau_shopline_gateway' ) ) . '">' . __( 'Settings', 'itau-shopline-for-woocommerce' ) . '</a>';
 
 		return array_merge( $plugin_links, $links );
 	}

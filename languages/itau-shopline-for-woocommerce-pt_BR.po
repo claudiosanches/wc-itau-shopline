@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: woocommerce_itau_shopline\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/plugins/woocommerce-domination/\n"
-"POT-Creation-Date: 2015-09-03 09:09:08+00:00\n"
-"PO-Revision-Date: 2015-09-03 06:12-0300\n"
+"POT-Creation-Date: 2015-09-04 03:25:32+00:00\n"
+"PO-Revision-Date: 2015-09-04 00:26-0300\n"
 "Last-Translator: Claudio Sanches <contato@claudiosmweb.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-KeywordsList: __\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: woocommerce-itau-shopline.php\n"
+"X-Poedit-SearchPath-1: itau-shopline-for-woocommerce.php\n"
 "X-Poedit-SearchPath-2: includes/wc-class-itau-shopline-api.php\n"
 "X-Poedit-SearchPath-3: includes/wc-class-itau-shopline-cripto.php\n"
 "X-Poedit-SearchPath-4: includes/wc-class-itau-shopline-gateway.php\n"
@@ -36,8 +36,8 @@ msgstr ""
 "obrigado! "
 
 #. Plugin Name of the plugin/theme
-msgid "WooCommerce Itau Shopline"
-msgstr "WooCommerce Itau Shopline"
+msgid "Itau Shopline for WooCommerce"
+msgstr "Itau Shopline for WooCommerce"
 
 #: includes/views/html-admin-page.php:23
 msgid "donation"
@@ -53,8 +53,8 @@ msgid ""
 msgstr "Moeda <code>%s</code> não é suportada. Funciona apenas com Real (R$)."
 
 #: includes/views/html-notice-woocommerce-missing.php:20
-msgid "WooCommerce Itau Shopline Disabled"
-msgstr "WooCommerce Itau Shopline desabilitado"
+msgid "Itau Shopline for WooCommerce Disabled"
+msgstr "Itau Shopline for WooCommerce desabilitado"
 
 #: includes/views/html-notice-woocommerce-missing.php:20
 msgid "This plugin depends on the last version of %s to work!"
@@ -285,6 +285,10 @@ msgstr "Requisição inválida"
 msgid "Itau Shoptine - Every 3 hours"
 msgstr "Itau Shopline - Cada 3 horas"
 
+#: itau-shopline-for-woocommerce.php:142
+msgid "Settings"
+msgstr "Configurações"
+
 #: templates/emails/html-instructions.php:15
 #: templates/emails/plain-instructions.php:14
 msgid "Payment"
@@ -316,13 +320,9 @@ msgstr "Fazer pagamento"
 msgid "Please click in the following button to make your payment."
 msgstr "Por favor, clique no link a seguinte para realizar o pagamento."
 
-#: woocommerce-itau-shopline.php:142
-msgid "Settings"
-msgstr "Configurações"
-
 #. Plugin URI of the plugin/theme
-msgid "https://github.com/claudiosmweb/woocommerce-itau-shopline"
-msgstr "https://github.com/claudiosmweb/woocommerce-itau-shopline"
+msgid "https://github.com/claudiosmweb/itau-shopline-for-woocommerce"
+msgstr "https://github.com/claudiosmweb/itau-shopline-for-woocommerce"
 
 #. Description of the plugin/theme
 msgid "Itau Shopline payment gateway for WooCommerce."
