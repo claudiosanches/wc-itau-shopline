@@ -1,10 +1,10 @@
 {
-  "name": "itau-shopline-for-woocommerce",
+  "name": "wc-itau-shopline",
   "description": "Itaú Shopline payment gateway for WooCommerce.",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/claudiosmweb/itau-shopline-for-woocommerce.git"
+    "url": "https://github.com/claudiosmweb/wc-itau-shopline.git"
   },
   "main": "Gruntfile.js",
   "devDependencies": {

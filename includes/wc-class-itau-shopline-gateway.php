@@ -28,8 +28,8 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	public function __construct() {
 		$this->id                 = 'itau-shopline';
 		$this->icon               = apply_filters( 'wc_itau_shopline_icon', plugins_url( 'assets/images/itau.png', plugin_dir_path( __FILE__ ) ) );
-		$this->method_title       = __( 'Itau Shopline', 'itau-shopline-for-woocommerce' );
-		$this->method_description = __( 'Accept payments by credit card, online debit or banking billet using the Itau Shopline.', 'itau-shopline-for-woocommerce' );
+		$this->method_title       = __( 'Itau Shopline', 'wc-itau-shopline' );
+		$this->method_description = __( 'Accept payments by credit card, online debit or banking billet using the Itau Shopline.', 'wc-itau-shopline' );
 
 		// Load the form fields.
 		$this->init_form_fields();
@@ -96,56 +96,56 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	public function init_form_fields() {
 		$this->form_fields = array(
 			'enabled' => array(
-				'title'   => __( 'Enable/Disable', 'itau-shopline-for-woocommerce' ),
+				'title'   => __( 'Enable/Disable', 'wc-itau-shopline' ),
 				'type'    => 'checkbox',
-				'label'   => __( 'Enable Itau Shopline', 'itau-shopline-for-woocommerce' ),
+				'label'   => __( 'Enable Itau Shopline', 'wc-itau-shopline' ),
 				'default' => 'no'
 			),
 			'title' => array(
-				'title'       => __( 'Title', 'itau-shopline-for-woocommerce' ),
+				'title'       => __( 'Title', 'wc-itau-shopline' ),
 				'type'        => 'text',
-				'description' => __( 'This controls the title which the user sees during checkout.', 'itau-shopline-for-woocommerce' ),
+				'description' => __( 'This controls the title which the user sees during checkout.', 'wc-itau-shopline' ),
 				'desc_tip'    => true,
-				'default'     => __( 'Backing Ticket or Online Debit', 'itau-shopline-for-woocommerce' )
+				'default'     => __( 'Backing Ticket or Online Debit', 'wc-itau-shopline' )
 			),
 			'description' => array(
-				'title'       => __( 'Description', 'itau-shopline-for-woocommerce' ),
+				'title'       => __( 'Description', 'wc-itau-shopline' ),
 				'type'        => 'textarea',
-				'description' => __( 'This controls the description which the user sees during checkout.', 'itau-shopline-for-woocommerce' ),
-				'default'     => __( 'Pay with banking billet or online debit in Itau safe environment.', 'itau-shopline-for-woocommerce' )
+				'description' => __( 'This controls the description which the user sees during checkout.', 'wc-itau-shopline' ),
+				'default'     => __( 'Pay with banking billet or online debit in Itau safe environment.', 'wc-itau-shopline' )
 			),
 			'integration' => array(
-				'title'       => __( 'Integration Settings', 'itau-shopline-for-woocommerce' ),
+				'title'       => __( 'Integration Settings', 'wc-itau-shopline' ),
 				'type'        => 'title',
 				'description' => ''
 			),
 			'website_code' => array(
-				'title'             => __( 'Website Code', 'itau-shopline-for-woocommerce' ),
+				'title'             => __( 'Website Code', 'wc-itau-shopline' ),
 				'type'              => 'text',
-				'description'       => __( 'Please enter your Website Code. This is needed in order to take payment.', 'itau-shopline-for-woocommerce' ),
+				'description'       => __( 'Please enter your Website Code. This is needed in order to take payment.', 'wc-itau-shopline' ),
 				'default'           => '',
 				'custom_attributes' => array(
 					'required' => 'required'
 				)
 			),
 			'encryption_key' => array(
-				'title'             => __( 'Encryption Key', 'itau-shopline-for-woocommerce' ),
+				'title'             => __( 'Encryption Key', 'wc-itau-shopline' ),
 				'type'              => 'text',
-				'description'       => __( 'Please enter your Encryption Key. This is needed in order to take payment.', 'itau-shopline-for-woocommerce' ),
+				'description'       => __( 'Please enter your Encryption Key. This is needed in order to take payment.', 'wc-itau-shopline' ),
 				'default'           => '',
 				'custom_attributes' => array(
 					'required' => 'required'
 				)
 			),
 			'behavior' => array(
-				'title'       => __( 'Integration Behavior', 'itau-shopline-for-woocommerce' ),
+				'title'       => __( 'Integration Behavior', 'wc-itau-shopline' ),
 				'type'        => 'title',
 				'description' => ''
 			),
 			'days_to_pay' => array(
-				'title'             => __( 'Days to Pay', 'itau-shopline-for-woocommerce' ),
+				'title'             => __( 'Days to Pay', 'wc-itau-shopline' ),
 				'type'              => 'number',
-				'description'       => __( 'Please enter how many consecutive days customers will have to pay.', 'itau-shopline-for-woocommerce' ),
+				'description'       => __( 'Please enter how many consecutive days customers will have to pay.', 'wc-itau-shopline' ),
 				'desc_tip'          => true,
 				'default'           => '1',
 				'custom_attributes' => array(
@@ -155,37 +155,37 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 				)
 			),
 			'note_line1' => array(
-				'title'       => __( 'Notes (line 1)', 'itau-shopline-for-woocommerce' ),
+				'title'       => __( 'Notes (line 1)', 'wc-itau-shopline' ),
 				'type'        => 'textarea',
-				'description' => __( 'Can not be more than 60 characters.', 'itau-shopline-for-woocommerce' ),
+				'description' => __( 'Can not be more than 60 characters.', 'wc-itau-shopline' ),
 				'desc_tip'    => true,
 				'default'     => ''
 			),
 			'note_line2' => array(
-				'title'       => __( 'Notes (line 2)', 'itau-shopline-for-woocommerce' ),
+				'title'       => __( 'Notes (line 2)', 'wc-itau-shopline' ),
 				'type'        => 'textarea',
-				'description' => __( 'Can not be more than 60 characters.', 'itau-shopline-for-woocommerce' ),
+				'description' => __( 'Can not be more than 60 characters.', 'wc-itau-shopline' ),
 				'desc_tip'    => true,
 				'default'     => ''
 			),
 			'note_line3' => array(
-				'title'       => __( 'Notes (line 3)', 'itau-shopline-for-woocommerce' ),
+				'title'       => __( 'Notes (line 3)', 'wc-itau-shopline' ),
 				'type'        => 'textarea',
-				'description' => __( 'Can not be more than 60 characters.', 'itau-shopline-for-woocommerce' ),
+				'description' => __( 'Can not be more than 60 characters.', 'wc-itau-shopline' ),
 				'desc_tip'    => true,
 				'default'     => ''
 			),
 			'testing' => array(
-				'title'       => __( 'Gateway Testing', 'itau-shopline-for-woocommerce' ),
+				'title'       => __( 'Gateway Testing', 'wc-itau-shopline' ),
 				'type'        => 'title',
 				'description' => ''
 			),
 			'debug' => array(
-				'title'       => __( 'Debug Log', 'itau-shopline-for-woocommerce' ),
+				'title'       => __( 'Debug Log', 'wc-itau-shopline' ),
 				'type'        => 'checkbox',
-				'label'       => __( 'Enable logging', 'itau-shopline-for-woocommerce' ),
+				'label'       => __( 'Enable logging', 'wc-itau-shopline' ),
 				'default'     => 'no',
-				'description' => sprintf( __( 'Log Itau Shopline events, you can check this log in %s.', 'itau-shopline-for-woocommerce' ), '<a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=' . esc_attr( $this->id ) . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.log' ) ) . '">' . __( 'System Status &gt; Logs', 'itau-shopline-for-woocommerce' ) . '</a>' )
+				'description' => sprintf( __( 'Log Itau Shopline events, you can check this log in %s.', 'wc-itau-shopline' ), '<a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=' . esc_attr( $this->id ) . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.log' ) ) . '">' . __( 'System Status &gt; Logs', 'wc-itau-shopline' ) . '</a>' )
 			)
 		);
 	}
@@ -208,7 +208,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 		$order = wc_get_order( $order_id );
 
 		// Mark as on-hold (we're awaiting the payment).
-		$order->update_status( 'on-hold', __( 'Itau Shopline: Awaiting payment.', 'itau-shopline-for-woocommerce' ) );
+		$order->update_status( 'on-hold', __( 'Itau Shopline: Awaiting payment.', 'wc-itau-shopline' ) );
 
 		// Remove cart.
 		WC()->cart->empty_cart();
@@ -236,8 +236,8 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 
 			if ( is_object( $order ) && $this->id === $order->payment_method ) {
 				if ( 'on-hold' !== $order->status ) {
-					$message = sprintf( __( 'You can no longer make the payment for order %s.', 'itau-shopline-for-woocommerce' ), $order->get_order_number() );
-					wp_die( $message, __( 'Payment method expired', 'itau-shopline-for-woocommerce' ), array( 'response' => 200 ) );
+					$message = sprintf( __( 'You can no longer make the payment for order %s.', 'wc-itau-shopline' ), $order->get_order_number() );
+					wp_die( $message, __( 'Payment method expired', 'wc-itau-shopline' ), array( 'response' => 200 ) );
 				}
 
 				$hash  = $this->api->get_payment_hash( $order );
@@ -248,7 +248,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 			}
 		}
 
-		wp_die( __( 'Invalid request!', 'itau-shopline-for-woocommerce' ), __( 'Invalid request!', 'itau-shopline-for-woocommerce' ), array( 'response' => 401 ) );
+		wp_die( __( 'Invalid request!', 'wc-itau-shopline' ), __( 'Invalid request!', 'wc-itau-shopline' ), array( 'response' => 401 ) );
 	}
 
 	/**

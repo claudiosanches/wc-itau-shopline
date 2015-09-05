@@ -10,6 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div class="error">
-	<p><?php printf( __( 'Currency <code>%s</code> is not supported. Works only with Brazilian Real.', 'itau-shopline-for-woocommerce' ), get_woocommerce_currency() ); ?>
+	<p><?php printf( __( 'Currency <code>%s</code> is not supported. Works only with Brazilian Real.', 'wc-itau-shopline' ), get_woocommerce_currency() ); ?>
 	</p>
 </div>

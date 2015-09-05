@@ -30,7 +30,7 @@ class WC_Itau_Shopline_Sounder {
 	public static function sounder_schedule( $schedules ) {
 		$schedules['itau_shopline'] = array(
 			'interval' => 10800,
-			'display'  => __( 'Itau Shoptine - Every 3 hours', 'itau-shopline-for-woocommerce' )
+			'display'  => __( 'Itau Shoptine - Every 3 hours', 'wc-itau-shopline' )
 		);
 
 		return $schedules;

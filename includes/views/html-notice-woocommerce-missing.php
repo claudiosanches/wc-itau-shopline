@@ -17,5 +17,5 @@ if ( current_user_can( 'install_plugins' ) ) {
 ?>
 
 <div class="error">
-	<p><strong><?php _e( 'Itau Shopline for WooCommerce Disabled', 'itau-shopline-for-woocommerce' ); ?></strong>: <?php printf( __( 'This plugin depends on the last version of %s to work!', 'itau-shopline-for-woocommerce' ), '<a href="' . esc_url( $url ) . '">' . __( 'WooCommerce', 'itau-shopline-for-woocommerce' ) . '</a>' ); ?></p>
+	<p><strong><?php _e( 'Itau Shopline for WooCommerce Disabled', 'wc-itau-shopline' ); ?></strong>: <?php printf( __( 'This plugin depends on the last version of %s to work!', 'wc-itau-shopline' ), '<a href="' . esc_url( $url ) . '">' . __( 'WooCommerce', 'wc-itau-shopline' ) . '</a>' ); ?></p>
 </div>

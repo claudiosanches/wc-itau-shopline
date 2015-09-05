@@ -11,11 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-_e( 'Payment', 'itau-shopline-for-woocommerce' );
+_e( 'Payment', 'wc-itau-shopline' );
 
 echo "\n\n";
 
-_e( 'Please use the link below to make your payment:', 'itau-shopline-for-woocommerce' );
+_e( 'Please use the link below to make your payment:', 'wc-itau-shopline' );
 
 echo "\n";
 
@@ -23,6 +23,6 @@ echo esc_url( $url );
 
 echo "\n";
 
-_e( 'After we receive the payment confirmation, your order will be processed.', 'itau-shopline-for-woocommerce' );
+_e( 'After we receive the payment confirmation, your order will be processed.', 'wc-itau-shopline' );
 
 echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";

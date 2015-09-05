@@ -58,11 +58,11 @@ class WC_Itau_Shopline_Cripto {
 	 */
 	public function __construct( $code, $key ) {
 		if ( strlen( $code ) != self::CODE_LENGTH ) {
-			throw new Exception( sprintf( __( 'The company code size can not be different of %d positions.', 'itau-shopline-for-woocommerce' ), self::CODE_LENGTH ) );
+			throw new Exception( sprintf( __( 'The company code size can not be different of %d positions.', 'wc-itau-shopline' ), self::CODE_LENGTH ) );
 		}
 
 		if ( strlen( $key ) != self::KEY_LENGTH ) {
-			throw new Exception( sprintf( __( 'The key size can not be different of %d positions.', 'itau-shopline-for-woocommerce' ), self::CODE_LENGTH ) );
+			throw new Exception( sprintf( __( 'The key size can not be different of %d positions.', 'wc-itau-shopline' ), self::CODE_LENGTH ) );
 		}
 
 		$this->code = strtoupper( $code );
@@ -254,35 +254,35 @@ class WC_Itau_Shopline_Cripto {
 		$args = wp_parse_args( $data, $default );
 
 		if ( ( 1 > strlen( $args['order_number'] ) ) || ( 8 < strlen( $args['order_number'] ) ) ) {
-			throw new Exception( __( 'Invalid order number.', 'itau-shopline-for-woocommerce' ) );
+			throw new Exception( __( 'Invalid order number.', 'wc-itau-shopline' ) );
 		}
 
 		if ( ! in_array( $args['registration'], array( '01', '02' ) ) ) {
-			throw new Exception( __( 'Invalid registration code.', 'itau-shopline-for-woocommerce' ) );
+			throw new Exception( __( 'Invalid registration code.', 'wc-itau-shopline' ) );
 		}
 
 		if ( '' != $args['document'] && ( ! is_numeric( $args['document'] ) && 14 < strlen( $args['document'] ) ) ) {
-			throw new Exception( __( 'Invalid document number.', 'itau-shopline-for-woocommerce' ) );
+			throw new Exception( __( 'Invalid document number.', 'wc-itau-shopline' ) );
 		}
 
 		if ( '' != $args['zipcode'] && ( ! is_numeric( $args['zipcode'] ) || 8 != strlen( $args['zipcode'] ) ) ) {
-			throw new Exception( __( 'Invalid zipcode.', 'itau-shopline-for-woocommerce' ) );
+			throw new Exception( __( 'Invalid zipcode.', 'wc-itau-shopline' ) );
 		}
 
 		if ( '' != $args['expiry'] && ( ! is_numeric( $args['expiry'] ) || 8 != strlen( $args['expiry'] ) ) ) {
-			throw new Exception( __( 'Invalid expiry date.', 'itau-shopline-for-woocommerce' ) );
+			throw new Exception( __( 'Invalid expiry date.', 'wc-itau-shopline' ) );
 		}
 
 		if ( 60 < strlen( $args['note_line1'] ) ) {
-			throw new Exception( __( 'Invalid note line 1. Can not be more than 60 characters.', 'itau-shopline-for-woocommerce' ) );
+			throw new Exception( __( 'Invalid note line 1. Can not be more than 60 characters.', 'wc-itau-shopline' ) );
 		}
 
 		if ( 60 < strlen( $args['note_line2'] ) ) {
-			throw new Exception( __( 'Invalid note line 2. Can not be more than 60 characters.', 'itau-shopline-for-woocommerce' ) );
+			throw new Exception( __( 'Invalid note line 2. Can not be more than 60 characters.', 'wc-itau-shopline' ) );
 		}
 
 		if ( 60 < strlen( $args['note_line3'] ) ) {
-			throw new Exception( __( 'Invalid note line 3. Can not be more than 60 characters.', 'itau-shopline-for-woocommerce' ) );
+			throw new Exception( __( 'Invalid note line 3. Can not be more than 60 characters.', 'wc-itau-shopline' ) );
 		}
 
 		// Fix zeros.
@@ -346,7 +346,7 @@ class WC_Itau_Shopline_Cripto {
 	 */
 	public function generate_request( $order_number, $type = '1' ) {
 		if ( ! in_array( $type, array( '0', '1' ) ) ) {
-			throw new Exception( __( 'Invalid type.', 'itau-shopline-for-woocommerce' ) );
+			throw new Exception( __( 'Invalid type.', 'wc-itau-shopline' ) );
 		}
 
 		$order_number = $this->fill_zeros( $order_number, 8 );

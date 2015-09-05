@@ -175,9 +175,9 @@ class WC_Itau_Shopline_API {
 	 */
 	protected function get_payment_type_name( $type ) {
 		$types = array(
-			'01' => __( 'direct debit or financing', 'itau-shopline-for-woocommerce' ),
-			'02' => __( 'banking ticket', 'itau-shopline-for-woocommerce' ),
-			'03' => __( 'credit card', 'itau-shopline-for-woocommerce' ),
+			'01' => __( 'direct debit or financing', 'wc-itau-shopline' ),
+			'02' => __( 'banking ticket', 'wc-itau-shopline' ),
+			'03' => __( 'credit card', 'wc-itau-shopline' ),
 		);
 
 		return isset( $types[ $type ] ) ? $types[ $type ] : '';
@@ -326,7 +326,7 @@ class WC_Itau_Shopline_API {
 		$data = array(
 			'order_number'  => $order->id,
 			'order_total'   => (float) $order->get_total(),
-			'description'   => sprintf( __( 'Payment for order %s', 'itau-shopline-for-woocommerce' ), $order->get_order_number() ),
+			'description'   => sprintf( __( 'Payment for order %s', 'wc-itau-shopline' ), $order->get_order_number() ),
 			'customer_name' => $this->get_customer_name( $order, $document['code'] ),
 			'registration'  => $document['code'],
 			'document'      => $document['number'],
@@ -449,7 +449,7 @@ class WC_Itau_Shopline_API {
 
 		// Cancel order if expired.
 		if ( $order->wc_itau_shopline_expiry_time < $now && 'on-hold' === $order->get_status() ) {
-			$order->update_status( 'cancelled', __( 'Itau Shopline: Order expired for lack of pay.', 'itau-shopline-for-woocommerce' ) );
+			$order->update_status( 'cancelled', __( 'Itau Shopline: Order expired for lack of pay.', 'wc-itau-shopline' ) );
 
 			return false;
 		}
@@ -459,7 +459,7 @@ class WC_Itau_Shopline_API {
 			$limit_time = strtotime( '+60 minutes', strtotime( $order->order_date ) );
 
 			if ( $limit_time < $now ) {
-				$order->update_status( 'cancelled', __( 'Itau Shopline: Order canceled because customers not selected a form of payment yet.', 'itau-shopline-for-woocommerce' ) );
+				$order->update_status( 'cancelled', __( 'Itau Shopline: Order canceled because customers not selected a form of payment yet.', 'wc-itau-shopline' ) );
 
 				return false;
 			}
@@ -474,7 +474,7 @@ class WC_Itau_Shopline_API {
 				if ( ! in_array( $order->get_status(), array( 'processing', 'completed' ) ) ) {
 					$payment_type_name = $this->get_payment_type_name( $payment_details['payment_type'] );
 
-					$order->add_order_note( sprintf( __( 'Itau Shopline: Payment approved using %s.', 'itau-shopline-for-woocommerce' ), $payment_type_name ) );
+					$order->add_order_note( sprintf( __( 'Itau Shopline: Payment approved using %s.', 'wc-itau-shopline' ), $payment_type_name ) );
 				}
 
 				// Changing the order for processing and reduces the stock.
@@ -484,7 +484,7 @@ class WC_Itau_Shopline_API {
 
 				break;
 			case '03' :
-				$order->update_status( 'cancelled', __( 'Itau Shopline: Order expired for lack of pay.', 'itau-shopline-for-woocommerce' ) );
+				$order->update_status( 'cancelled', __( 'Itau Shopline: Order expired for lack of pay.', 'wc-itau-shopline' ) );
 				break;
 
 			default :
