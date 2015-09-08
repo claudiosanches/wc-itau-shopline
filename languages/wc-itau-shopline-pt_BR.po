@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: woocommerce_itau_shopline\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/plugins/woocommerce-domination/\n"
-"POT-Creation-Date: 2015-09-05 03:17:57+00:00\n"
-"PO-Revision-Date: 2015-09-05 00:18-0300\n"
+"POT-Creation-Date: 2015-09-08 01:13:11+00:00\n"
+"PO-Revision-Date: 2015-09-07 22:15-0300\n"
 "Last-Translator: Claudio Sanches <contato@claudiosmweb.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -265,19 +265,24 @@ msgstr ""
 msgid "System Status &gt; Logs"
 msgstr "Status do Sistema &gt; Logs"
 
-#: includes/wc-class-itau-shopline-gateway.php:211
+#: includes/wc-class-itau-shopline-gateway.php:207
+msgid "Missing CPF or CNPJ."
+msgstr ""
+"É necessário digitar um número de CPF ou CNPJ para realizar o pagamento."
+
+#: includes/wc-class-itau-shopline-gateway.php:224
 msgid "Itau Shopline: Awaiting payment."
 msgstr "Itau Shopline: Aguardando pagamento."
 
-#: includes/wc-class-itau-shopline-gateway.php:239
+#: includes/wc-class-itau-shopline-gateway.php:252
 msgid "You can no longer make the payment for order %s."
 msgstr "Você não pode mais fazer o pagamento do pedido %s."
 
-#: includes/wc-class-itau-shopline-gateway.php:240
+#: includes/wc-class-itau-shopline-gateway.php:253
 msgid "Payment method expired"
 msgstr "Método de pagamento expirado"
 
-#: includes/wc-class-itau-shopline-gateway.php:251
+#: includes/wc-class-itau-shopline-gateway.php:264
 msgid "Invalid request!"
 msgstr "Requisição inválida"
 

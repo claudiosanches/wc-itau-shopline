@@ -198,6 +198,21 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	}
 
 	/**
+	 * Validate fields.
+	 *
+	 * @return bool
+	 */
+	public function validate_fields() {
+		if ( empty( $_REQUEST['billing_cpf'] ) && empty( $_REQUEST['billing_cnpj'] ) ) {
+			wc_add_notice( '<strong>' . $this->get_title() . ':</strong> ' . __( 'Missing CPF or CNPJ.', 'wc-itau-shopline' ), 'error' );
+
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Process the payment and return the result.
 	 *
 	 * @param  int $order_id
