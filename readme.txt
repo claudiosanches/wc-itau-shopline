@@ -37,7 +37,7 @@ Você pode esclarecer suas dúvidas usando:
 * Utilizando o nosso [fórum no Github](https://github.com/claudiosmweb/wc-itau-shopline).
 * Criando um tópico no [fórum de ajuda do WordPress](http://wordpress.org/support/plugin/wc-itau-shopline).
 
-= Coloborar =
+= Colaborar =
 
 Você pode contribuir com código-fonte em nossa página no [GitHub](https://github.com/claudiosmweb/wc-itau-shopline).
 
@@ -82,9 +82,9 @@ Serão aceitos todos os meios de pagamento do Itau Shopline, sendo eles boleto b
 
 Sim é alterado automaticamente usando um sistema de sounda que irá consultar os dados dos pedidos no Itau Shopline.
 
-Esta sounda é ativada a cada 3 horas por cron, desta forma é de vital importancia que o cron do WordPress esteja funcionando corretamente.
+Esta sounda é ativada a cada 3 horas por cron, desta forma é de vital importância que o cron do WordPress esteja funcionando corretamente.
 
-Caso os status não estejam sendo alterados, é recomendado destivar o cron do WordPress e configurar o servidor para rodar o cron acessando o arquivo `wp-cron.php` pelo menos a cada 5 minutos.
+Caso os status não estejam sendo alterados, é recomendado desativar o cron do WordPress e configurar o servidor para rodar o cron acessando o arquivo `wp-cron.php` pelo menos a cada 5 minutos.
 
 = O pedido foi pago e ficou com o status de "processando" e não como "concluído", isto esta certo? =
 
