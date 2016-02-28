@@ -122,7 +122,19 @@ module.exports = function( grunt ) {
 					}
 				}
 			}
-		}
+		},
+
+		// Create README.md for GitHub.
+		wp_readme_to_markdown: {
+			options: {
+				screenshot_url: 'http://ps.w.org/<%= pkg.name %>/assets/{screenshot}.png'
+			},
+			dest: {
+				files: {
+					'README.md': 'readme.txt',
+				},
+			},
+		},
 	});
 
 	// Load tasks
@@ -130,6 +142,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
 	grunt.loadNpmTasks( 'grunt-rsync' );
 	grunt.loadNpmTasks( 'grunt-shell' );
+	grunt.loadNpmTasks( 'grunt-wp-readme-to-markdown' );
 
 	// Register tasks
 	grunt.registerTask( 'default', [] );
@@ -143,4 +156,6 @@ module.exports = function( grunt ) {
 		'shell:svn_add',
 		'shell:svn_commit'
 	] );
+
+	grunt.registerTask( 'readme', 'wp_readme_to_markdown' );
 };

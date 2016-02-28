@@ -101,13 +101,13 @@ Por favor, caso você tenha algum problema com o funcionamento do plugin, [abra 
 ## Screenshots ##
 
 ### 1. Configurações do plugin. ###
-![1. Configurações do plugin.](http://ps.w.org/itau-shopline-for-woocommerce/assets/screenshot-1.png)
+![Configurações do plugin.](http://ps.w.org/wc-itau-shopline/assets/screenshot-1.png)
 
 ### 2. Método de pagamento na página de finalizar o pedido. ###
-![2. Método de pagamento na página de finalizar o pedido.](http://ps.w.org/itau-shopline-for-woocommerce/assets/screenshot-2.png)
+![Método de pagamento na página de finalizar o pedido.](http://ps.w.org/wc-itau-shopline/assets/screenshot-2.png)
 
 ### 3. Exemplo dos meios de pagamentos sendo exibidos no Itaú Shopline. ###
-![3. Exemplo dos meios de pagamentos sendo exibidos no Itaú Shopline.](http://ps.w.org/itau-shopline-for-woocommerce/assets/screenshot-3.png)
+![Exemplo dos meios de pagamentos sendo exibidos no Itaú Shopline.](http://ps.w.org/wc-itau-shopline/assets/screenshot-3.png)
 
 
 ## Changelog ##
