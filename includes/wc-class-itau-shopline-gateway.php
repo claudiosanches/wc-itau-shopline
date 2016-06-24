@@ -11,7 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @class   WC_Itau_Shopline_Gateway
  * @extends WC_Payment_Gateway
  * @version 1.0.0
- * @author  Claudio Sanches
  */
 class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 

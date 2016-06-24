@@ -2,7 +2,7 @@
 Contributors: claudiosanches
 Tags: woocommerce, itau, shopline, payment
 Requires at least: 4.0
-Tested up to: 4.4
+Tested up to: 4.5
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -21,7 +21,7 @@ Este plugin foi desenvolvido a partir da documentação oficial do Itaú Shoplin
 
 = Compatibilidade =
 
-Compatível com as versões 2.3.x, 2.4.x e 2.5.x do WooCommerce.
+Compatível desde a versão 2.3.x até 2.6.x do WooCommerce.
 
 É requerido o plugin [WooCommerce Extra Checkout Fields for Brazil](http://wordpress.org/plugins/woocommerce-extra-checkout-fields-for-brazil/) para o envio do CPF ou CPNJ para o Itaú, junto com o número do endereço e bairro.
 

@@ -8,7 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @class   WC_Itau_Shopline_Sounder
  * @version 1.0.0
- * @author  Claudio Sanches
  */
 class WC_Itau_Shopline_Sounder {
 
