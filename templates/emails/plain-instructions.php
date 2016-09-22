@@ -11,11 +11,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-_e( 'Payment', 'wc-itau-shopline' );
+esc_html_e( 'Payment', 'wc-itau-shopline' );
 
 echo "\n\n";
 
-_e( 'Please use the link below to make your payment:', 'wc-itau-shopline' );
+if ( $billet_only ) {
+	esc_html_e( 'Please use the link below get your banking billet:', 'wc-itau-shopline' );
+} else {
+	esc_html_e( 'Please use the link below to make your payment:', 'wc-itau-shopline' );
+}
 
 echo "\n";
 
@@ -23,6 +27,6 @@ echo esc_url( $url );
 
 echo "\n";
 
-_e( 'After we receive the payment confirmation, your order will be processed.', 'wc-itau-shopline' );
+esc_html_e( 'After we receive the payment confirmation, your order will be processed.', 'wc-itau-shopline' );
 
 echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";

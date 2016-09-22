@@ -296,7 +296,8 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 		wc_get_template(
 			'payment-instructions.php',
 			array(
-				'url' => WC_Itau_Shopline::get_payment_url( $order->order_key )
+				'url'         => WC_Itau_Shopline::get_payment_url( $order->order_key ),
+				'billet_only' => 'yes' === $this->billet_only,
 			),
 			'woocommerce/itau-shopline/',
 			WC_Itau_Shopline::get_templates_path()
@@ -321,7 +322,8 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 			wc_get_template(
 				'emails/plain-instructions.php',
 				array(
-					'url' => $url
+					'url'         => $url,
+					'billet_only' => 'yes' === $this->billet_only,
 				),
 				'woocommerce/itau-shopline/',
 				WC_Itau_Shopline::get_templates_path()
@@ -330,7 +332,8 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 			wc_get_template(
 				'emails/html-instructions.php',
 				array(
-					'url' => $url
+					'url'         => $url,
+					'billet_only' => 'yes' === $this->billet_only,
 				),
 				'woocommerce/itau-shopline/',
 				WC_Itau_Shopline::get_templates_path()
