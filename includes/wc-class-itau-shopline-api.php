@@ -127,7 +127,7 @@ class WC_Itau_Shopline_API {
 		$this->debug          = $debug;
 
 		// Active logs.
-		if ( 'yes' == $this->debug ) {
+		if ( 'yes' === $this->debug ) {
 			$this->log = new WC_Logger();
 		}
 	}
@@ -316,7 +316,7 @@ class WC_Itau_Shopline_API {
 	 * @return string
 	 */
 	public function get_payment_hash( $order ) {
-		if ( 'yes' == $this->debug ) {
+		if ( 'yes' === $this->debug ) {
 			$this->log->add( $this->id, 'Generating payment hash for order ' . $order->id );
 		}
 
@@ -343,7 +343,7 @@ class WC_Itau_Shopline_API {
 
 		$data = apply_filters( 'wc_itau_shopline_payment_data', $data );
 
-		if ( 'yes' == $this->debug ) {
+		if ( 'yes' === $this->debug ) {
 			$this->log->add( $this->id, 'Hash data for order ' . $order->id . ': ' . print_r( $data, true ) );
 		}
 
@@ -353,7 +353,7 @@ class WC_Itau_Shopline_API {
 
 			return $hash;
 		} catch ( Exception $e ) {
-			if ( 'yes' == $this->debug ) {
+			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, 'Error while creating the payment hash for order ' . $order->id . ': ' . $e->getMessage() );
 			}
 
@@ -371,7 +371,7 @@ class WC_Itau_Shopline_API {
 	 * @return array
 	 */
 	protected function get_payment_details( $order_id ) {
-		if ( 'yes' == $this->debug ) {
+		if ( 'yes' === $this->debug ) {
 			$this->log->add( $this->id, 'Requesting payment details for order ' . $order_id );
 		}
 
@@ -385,7 +385,7 @@ class WC_Itau_Shopline_API {
 
 			$response = wp_remote_get( $this->get_request_url( $hash ), $params );
 
-			if ( 'yes' == $this->debug ) {
+			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, 'Request data of payment details for order ' . $order_id . ': ' . print_r( $response['body'], true ) );
 			}
 
@@ -407,13 +407,13 @@ class WC_Itau_Shopline_API {
 				'status'       => sanitize_text_field( $payment_status['@attributes']['VALUE'] )
 			);
 
-			if ( 'yes' == $this->debug ) {
+			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, 'Payment details for order ' . $order_id . ' requested successfully: ' . print_r( $details, true ) );
 			}
 
 			return $details;
 		} catch ( Exception $e ) {
-			if ( 'yes' == $this->debug ) {
+			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, $e->getMessage() );
 			}
 
@@ -429,14 +429,14 @@ class WC_Itau_Shopline_API {
 	 * @return bool
 	 */
 	public function process_order_status( $order_id ) {
-		if ( 'yes' == $this->debug ) {
+		if ( 'yes' === $this->debug ) {
 			$this->log->add( $this->id, 'Processing payment status for order ' . $order_id );
 		}
 
 		$payment_details = $this->get_payment_details( $order_id );
 
 		if ( ! $payment_details ) {
-			if ( 'yes' == $this->debug ) {
+			if ( 'yes' === $this->debug ) {
 				$this->log->add( $this->id, 'Order status change failed for order ' . $order_id );
 			}
 
