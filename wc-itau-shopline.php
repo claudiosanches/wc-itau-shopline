@@ -5,7 +5,7 @@
  * Description: Itau Shopline payment gateway for WooCommerce.
  * Author: Claudio Sanches
  * Author URI: https://claudiosmweb.com/
- * Version: 1.0.0
+ * Version: 1.1.0
  * License: GPLv2 or later
  * Text Domain: wc-itau-shopline
  * Domain Path: languages/
@@ -32,7 +32,7 @@ class WC_Itau_Shopline {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.0.0';
+	const VERSION = '1.1.0';
 
 	/**
 	 * Instance of this class.

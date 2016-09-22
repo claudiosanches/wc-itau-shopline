@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Itau Shopline for WooCommerce 1.0.0\n"
+"Project-Id-Version: Itau Shopline for WooCommerce 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-itau-shopline\n"
-"POT-Creation-Date: 2016-02-28 15:39:45+00:00\n"
+"POT-Creation-Date: 2016-09-22 05:17:45+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,214 +47,220 @@ msgstr ""
 msgid "WooCommerce"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-api.php:178
+#: includes/wc-class-itau-shopline-api.php:177
 msgid "direct debit or financing"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-api.php:179
-msgid "banking ticket"
+#: includes/wc-class-itau-shopline-api.php:178
+msgid "banking billet"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-api.php:180
+#: includes/wc-class-itau-shopline-api.php:179
 msgid "credit card"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-api.php:329
+#: includes/wc-class-itau-shopline-api.php:328
 msgid "Payment for order %s"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-api.php:452
-#: includes/wc-class-itau-shopline-api.php:487
+#: includes/wc-class-itau-shopline-api.php:451
+#: includes/wc-class-itau-shopline-api.php:486
 msgid "Itau Shopline: Order expired for lack of pay."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-api.php:462
+#: includes/wc-class-itau-shopline-api.php:461
 msgid ""
 "Itau Shopline: Order canceled because customers not selected a form of "
 "payment yet."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-api.php:477
+#: includes/wc-class-itau-shopline-api.php:476
 msgid "Itau Shopline: Payment approved using %s."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-cripto.php:61
+#: includes/wc-class-itau-shopline-cripto.php:60
 msgid "The company code size can not be different of %d positions."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-cripto.php:65
+#: includes/wc-class-itau-shopline-cripto.php:64
 msgid "The key size can not be different of %d positions."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-cripto.php:257
+#: includes/wc-class-itau-shopline-cripto.php:242
 msgid "Invalid order number."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-cripto.php:261
+#: includes/wc-class-itau-shopline-cripto.php:246
 msgid "Invalid registration code."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-cripto.php:265
+#: includes/wc-class-itau-shopline-cripto.php:250
 msgid "Invalid document number."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-cripto.php:269
+#: includes/wc-class-itau-shopline-cripto.php:254
 msgid "Invalid zipcode."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-cripto.php:273
+#: includes/wc-class-itau-shopline-cripto.php:258
 msgid "Invalid expiry date."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-cripto.php:277
-msgid "Invalid note line 1. Can not be more than 60 characters."
+#: includes/wc-class-itau-shopline-cripto.php:262
+#: includes/wc-class-itau-shopline-cripto.php:266
+#: includes/wc-class-itau-shopline-cripto.php:270
+msgid "Invalid note line %s. Can not be more than 60 characters."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-cripto.php:281
-msgid "Invalid note line 2. Can not be more than 60 characters."
-msgstr ""
-
-#: includes/wc-class-itau-shopline-cripto.php:285
-msgid "Invalid note line 3. Can not be more than 60 characters."
-msgstr ""
-
-#: includes/wc-class-itau-shopline-cripto.php:349
+#: includes/wc-class-itau-shopline-cripto.php:334
 msgid "Invalid type."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:31
+#: includes/wc-class-itau-shopline-gateway.php:29
 msgid "Itau Shopline"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:32
+#: includes/wc-class-itau-shopline-gateway.php:30
 msgid ""
 "Accept payments by credit card, online debit or banking billet using the "
 "Itau Shopline."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:99
+#: includes/wc-class-itau-shopline-gateway.php:116
 msgid "Enable/Disable"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:101
+#: includes/wc-class-itau-shopline-gateway.php:118
 msgid "Enable Itau Shopline"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:105
+#: includes/wc-class-itau-shopline-gateway.php:122
 msgid "Title"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:107
+#: includes/wc-class-itau-shopline-gateway.php:124
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:109
-msgid "Backing Ticket or Online Debit"
+#: includes/wc-class-itau-shopline-gateway.php:126
+msgid "Backing Billet or Online Debit"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:112
+#: includes/wc-class-itau-shopline-gateway.php:129
 msgid "Description"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:114
+#: includes/wc-class-itau-shopline-gateway.php:131
 msgid "This controls the description which the user sees during checkout."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:115
+#: includes/wc-class-itau-shopline-gateway.php:132
 msgid "Pay with banking billet or online debit in Itau safe environment."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:118
+#: includes/wc-class-itau-shopline-gateway.php:135
 msgid "Integration Settings"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:123
+#: includes/wc-class-itau-shopline-gateway.php:140
 msgid "Website Code"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:125
+#: includes/wc-class-itau-shopline-gateway.php:142
 msgid "Please enter your Website Code. This is needed in order to take payment."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:132
+#: includes/wc-class-itau-shopline-gateway.php:149
 msgid "Encryption Key"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:134
+#: includes/wc-class-itau-shopline-gateway.php:151
 msgid "Please enter your Encryption Key. This is needed in order to take payment."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:141
+#: includes/wc-class-itau-shopline-gateway.php:158
 msgid "Integration Behavior"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:146
-msgid "Days to Pay"
-msgstr ""
-
-#: includes/wc-class-itau-shopline-gateway.php:148
-msgid "Please enter how many consecutive days customers will have to pay."
-msgstr ""
-
-#: includes/wc-class-itau-shopline-gateway.php:158
-msgid "Notes (line 1)"
-msgstr ""
-
-#: includes/wc-class-itau-shopline-gateway.php:160
-#: includes/wc-class-itau-shopline-gateway.php:167
-#: includes/wc-class-itau-shopline-gateway.php:174
-msgid "Can not be more than 60 characters."
+#: includes/wc-class-itau-shopline-gateway.php:163
+msgid "Only banking billet"
 msgstr ""
 
 #: includes/wc-class-itau-shopline-gateway.php:165
+msgid "Allow only banking billet"
+msgstr ""
+
+#: includes/wc-class-itau-shopline-gateway.php:166
+msgid "Allow payments only by banking billet"
+msgstr ""
+
+#: includes/wc-class-itau-shopline-gateway.php:171
+msgid "Days to Pay"
+msgstr ""
+
+#: includes/wc-class-itau-shopline-gateway.php:173
+msgid "Please enter how many consecutive days customers will have to pay."
+msgstr ""
+
+#: includes/wc-class-itau-shopline-gateway.php:183
+msgid "Notes (line 1)"
+msgstr ""
+
+#: includes/wc-class-itau-shopline-gateway.php:185
+#: includes/wc-class-itau-shopline-gateway.php:192
+#: includes/wc-class-itau-shopline-gateway.php:199
+msgid "Can not be more than 60 characters."
+msgstr ""
+
+#: includes/wc-class-itau-shopline-gateway.php:190
 msgid "Notes (line 2)"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:172
+#: includes/wc-class-itau-shopline-gateway.php:197
 msgid "Notes (line 3)"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:179
+#: includes/wc-class-itau-shopline-gateway.php:204
 msgid "Gateway Testing"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:184
+#: includes/wc-class-itau-shopline-gateway.php:209
 msgid "Debug Log"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:186
+#: includes/wc-class-itau-shopline-gateway.php:211
 msgid "Enable logging"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:188
+#: includes/wc-class-itau-shopline-gateway.php:213
 msgid "Log Itau Shopline events, you can check this log in %s."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:188
+#: includes/wc-class-itau-shopline-gateway.php:213
 msgid "System Status &gt; Logs"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:207
+#: includes/wc-class-itau-shopline-gateway.php:237
 msgid "Missing CPF or CNPJ."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:226
+#: includes/wc-class-itau-shopline-gateway.php:256
 msgid "Itau Shopline: Awaiting payment."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:254
+#: includes/wc-class-itau-shopline-gateway.php:284
 msgid "You can no longer make the payment for order %s."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:255
+#: includes/wc-class-itau-shopline-gateway.php:285
 msgid "Payment method expired"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-gateway.php:266
+#: includes/wc-class-itau-shopline-gateway.php:301
 msgid "Invalid request!"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-sounder.php:33
+#: includes/wc-class-itau-shopline-sounder.php:32
 msgid "Itau Shoptine - Every 3 hours"
 msgstr ""
 
@@ -263,27 +269,30 @@ msgstr ""
 msgid "Payment"
 msgstr ""
 
-#: templates/emails/html-instructions.php:17
-#: templates/emails/plain-instructions.php:18
+#: templates/emails/html-instructions.php:19
+#: templates/emails/plain-instructions.php:19
+#: templates/payment-instructions.php:20
+msgid "Please use the link below get your banking billet:"
+msgstr ""
+
+#: templates/emails/html-instructions.php:21
+#: templates/emails/plain-instructions.php:21
+#: templates/payment-instructions.php:22
 msgid "Please use the link below to make your payment:"
 msgstr ""
 
-#: templates/emails/html-instructions.php:17
+#: templates/emails/html-instructions.php:24
 msgid "Pay order"
 msgstr ""
 
-#: templates/emails/html-instructions.php:17
-#: templates/emails/plain-instructions.php:26
-#: templates/payment-instructions.php:20
+#: templates/emails/html-instructions.php:24
+#: templates/emails/plain-instructions.php:30
+#: templates/payment-instructions.php:25
 msgid "After we receive the payment confirmation, your order will be processed."
 msgstr ""
 
 #: templates/payment-instructions.php:18
 msgid "Make payment"
-msgstr ""
-
-#: templates/payment-instructions.php:19
-msgid "Please click in the following button to make your payment."
 msgstr ""
 
 #: wc-itau-shopline.php:142

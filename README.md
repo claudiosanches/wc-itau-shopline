@@ -2,8 +2,8 @@
 **Contributors:** claudiosanches  
 **Tags:** woocommerce, itau, shopline, payment  
 **Requires at least:** 4.0  
-**Tested up to:** 4.5  
-**Stable tag:** 1.0.0  
+**Tested up to:** 4.6  
+**Stable tag:** 1.1.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -101,23 +101,29 @@ Por favor, caso você tenha algum problema com o funcionamento do plugin, [abra 
 ## Screenshots ##
 
 ### 1. Configurações do plugin. ###
-![1. Configurações do plugin.](http://ps.w.org/itau-shopline-for-woocommerce/assets/screenshot-1.png)
+![Configurações do plugin.](http://ps.w.org/wc-itau-shopline/assets/screenshot-1.png)
 
 ### 2. Método de pagamento na página de finalizar o pedido. ###
-![2. Método de pagamento na página de finalizar o pedido.](http://ps.w.org/itau-shopline-for-woocommerce/assets/screenshot-2.png)
+![Método de pagamento na página de finalizar o pedido.](http://ps.w.org/wc-itau-shopline/assets/screenshot-2.png)
 
 ### 3. Exemplo dos meios de pagamentos sendo exibidos no Itaú Shopline. ###
-![3. Exemplo dos meios de pagamentos sendo exibidos no Itaú Shopline.](http://ps.w.org/itau-shopline-for-woocommerce/assets/screenshot-3.png)
+![Exemplo dos meios de pagamentos sendo exibidos no Itaú Shopline.](http://ps.w.org/wc-itau-shopline/assets/screenshot-3.png)
 
 
 ## Changelog ##
 
+### 1.1.0 - 2016/09/22 ###
+
+- Adicionada opção para gerar apenas boletos.
+- Corrigida uma mensagem de erro incorreta que aparecia na página de pagar o pedido quando feito pelo painel de administração.
+
 ### 1.0.0 - 2015/09/03 ###
 
-* Versão inicial.
+- Versão inicial.
 
 ## Upgrade Notice ##
 
-### 1.0.0 ###
+### 1.1.0 ###
 
-* Initial version.
+- Adicionada opção para gerar apenas boletos.
+- Corrigida uma mensagem de erro incorreta que aparecia na página de pagar o pedido quando feito pelo painel de administração.
