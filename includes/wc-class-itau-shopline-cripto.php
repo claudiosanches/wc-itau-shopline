@@ -234,7 +234,7 @@ class WC_Itau_Shopline_Cripto {
 			'return_url'    => '',
 			'note_line1'    => '',
 			'note_line2'    => '',
-			'note_line3'    => ''
+			'note_line3'    => '',
 		);
 		$args = wp_parse_args( $data, $default );
 
@@ -259,20 +259,20 @@ class WC_Itau_Shopline_Cripto {
 		}
 
 		if ( 60 < strlen( $args['note_line1'] ) ) {
-			throw new Exception( __( 'Invalid note line 1. Can not be more than 60 characters.', 'wc-itau-shopline' ) );
+			throw new Exception( sprintf( __( 'Invalid note line %s. Can not be more than 60 characters.', 'wc-itau-shopline' ), 1 ) );
 		}
 
 		if ( 60 < strlen( $args['note_line2'] ) ) {
-			throw new Exception( __( 'Invalid note line 2. Can not be more than 60 characters.', 'wc-itau-shopline' ) );
+			throw new Exception( sprintf( __( 'Invalid note line %s. Can not be more than 60 characters.', 'wc-itau-shopline' ), 2 ) );
 		}
 
 		if ( 60 < strlen( $args['note_line3'] ) ) {
-			throw new Exception( __( 'Invalid note line 3. Can not be more than 60 characters.', 'wc-itau-shopline' ) );
+			throw new Exception( sprintf( __( 'Invalid note line %s. Can not be more than 60 characters.', 'wc-itau-shopline' ), 3 ) );
 		}
 
 		// Fix zeros.
 		$args['order_number'] = $this->fill_zeros( $args['order_number'], 8 );
-		$args['order_total']  = $this->fill_zeros( number_format( $args['order_total'], 2, '', '' ) , 10 );
+		$args['order_total']  = $this->fill_zeros( number_format( $args['order_total'], 2, '', '' ), 10 );
 
 		// Remove accents.
 		$args['description']   = remove_accents( $args['description'] );
@@ -316,7 +316,7 @@ class WC_Itau_Shopline_Cripto {
 	 */
 	public function generate_cripto( $customer_code ) {
 		$_algorithm = $this->algorithm( $customer_code, $this->key );
-		$algorithm  = $this->algorithm( $this->code . $_algorithm, self::ITAU_KEY);
+		$algorithm  = $this->algorithm( $this->code . $_algorithm, self::ITAU_KEY );
 
 		return $this->convert( $algorithm );
 	}
@@ -343,7 +343,7 @@ class WC_Itau_Shopline_Cripto {
 	}
 
 	/**
-	 * Decripto
+	 * Decripto.
 	 *
 	 * @param  string $data
 	 *
@@ -356,7 +356,7 @@ class WC_Itau_Shopline_Cripto {
 		return array(
 			'code'         => substr( $algorithm, 0, 26 ),
 			'order_number' => substr( $algorithm, 26, 8 ),
-			'payment_type' => substr( $algorithm, 34, 2 )
+			'payment_type' => substr( $algorithm, 34, 2 ),
 		);
 	}
 
