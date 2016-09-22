@@ -202,6 +202,11 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	 * @return bool
 	 */
 	public function validate_fields() {
+		// Disable validation on Checkout pay page.
+		if ( is_checkout_pay_page() ) {
+			return true;
+		}
+
 		if ( empty( $_REQUEST['billing_cpf'] ) && empty( $_REQUEST['billing_cnpj'] ) ) {
 			wc_add_notice( '<strong>' . $this->get_title() . ':</strong> ' . __( 'Missing CPF or CNPJ.', 'wc-itau-shopline' ), 'error' );
 
@@ -254,8 +259,8 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 					wp_die( $message, __( 'Payment method expired', 'wc-itau-shopline' ), array( 'response' => 200 ) );
 				}
 
-				$hash  = $this->api->get_payment_hash( $order );
-				$url   = $this->api->get_shopline_url( $hash );
+				$hash = $this->api->get_payment_hash( $order );
+				$url  = $this->api->get_shopline_url( $hash );
 
 				wp_redirect( esc_url_raw( $url ) );
 				exit;
