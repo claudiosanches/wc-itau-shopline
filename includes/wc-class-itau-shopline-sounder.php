@@ -52,11 +52,16 @@ class WC_Itau_Shopline_Sounder {
 	/**
 	 * Get API instance.
 	 *
-	 * @return WC_Itau_Shopline_API
+	 * @return WC_Itau_Shopline_API|null
 	 */
 	protected static function get_api_instance() {
 		$settings = get_option( 'woocommerce_itau-shopline_settings', array() );
-		$api      = new WC_Itau_Shopline_API(
+
+		if ( empty( $settings ) ) {
+			return null;
+		}
+
+		$api = new WC_Itau_Shopline_API(
 			$settings['website_code'],
 			$settings['encryption_key'],
 			$settings['title'],
@@ -76,7 +81,12 @@ class WC_Itau_Shopline_Sounder {
 	public static function sounder() {
 		global $wpdb;
 
-		$api    = self::get_api_instance();
+		$api = self::get_api_instance();
+
+		if ( is_null( $api ) ) {
+			return;
+		}
+
 		$orders = $wpdb->get_results( "
 			SELECT posts.ID
 			FROM $wpdb->posts AS posts
