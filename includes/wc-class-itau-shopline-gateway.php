@@ -41,6 +41,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 		$this->description    = $this->get_option( 'description' );
 		$this->website_code   = $this->get_option( 'website_code' );
 		$this->encryption_key = $this->get_option( 'encryption_key' );
+		$this->billet_only    = $this->get_option( 'billet_only', 'no' );
 		$this->days_to_pay    = $this->get_option( 'days_to_pay' );
 		$this->note_line1     = $this->get_option( 'note_line1' );
 		$this->note_line2     = $this->get_option( 'note_line2' );
@@ -98,25 +99,25 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 				'title'   => __( 'Enable/Disable', 'wc-itau-shopline' ),
 				'type'    => 'checkbox',
 				'label'   => __( 'Enable Itau Shopline', 'wc-itau-shopline' ),
-				'default' => 'no'
+				'default' => 'no',
 			),
 			'title' => array(
 				'title'       => __( 'Title', 'wc-itau-shopline' ),
 				'type'        => 'text',
 				'description' => __( 'This controls the title which the user sees during checkout.', 'wc-itau-shopline' ),
 				'desc_tip'    => true,
-				'default'     => __( 'Backing Ticket or Online Debit', 'wc-itau-shopline' )
+				'default'     => __( 'Backing Ticket or Online Debit', 'wc-itau-shopline' ),
 			),
 			'description' => array(
 				'title'       => __( 'Description', 'wc-itau-shopline' ),
 				'type'        => 'textarea',
 				'description' => __( 'This controls the description which the user sees during checkout.', 'wc-itau-shopline' ),
-				'default'     => __( 'Pay with banking billet or online debit in Itau safe environment.', 'wc-itau-shopline' )
+				'default'     => __( 'Pay with banking billet or online debit in Itau safe environment.', 'wc-itau-shopline' ),
 			),
 			'integration' => array(
 				'title'       => __( 'Integration Settings', 'wc-itau-shopline' ),
 				'type'        => 'title',
-				'description' => ''
+				'description' => '',
 			),
 			'website_code' => array(
 				'title'             => __( 'Website Code', 'wc-itau-shopline' ),
@@ -124,8 +125,8 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 				'description'       => __( 'Please enter your Website Code. This is needed in order to take payment.', 'wc-itau-shopline' ),
 				'default'           => '',
 				'custom_attributes' => array(
-					'required' => 'required'
-				)
+					'required' => 'required',
+				),
 			),
 			'encryption_key' => array(
 				'title'             => __( 'Encryption Key', 'wc-itau-shopline' ),
@@ -133,13 +134,21 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 				'description'       => __( 'Please enter your Encryption Key. This is needed in order to take payment.', 'wc-itau-shopline' ),
 				'default'           => '',
 				'custom_attributes' => array(
-					'required' => 'required'
-				)
+					'required' => 'required',
+				),
 			),
 			'behavior' => array(
 				'title'       => __( 'Integration Behavior', 'wc-itau-shopline' ),
 				'type'        => 'title',
-				'description' => ''
+				'description' => '',
+			),
+			'billet_only' => array(
+				'title'       => __( 'Only banking billet', 'wc-itau-shopline' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Allow only banking billet', 'wc-itau-shopline' ),
+				'description' => __( 'Allow payments only by banking billet', 'wc-itau-shopline' ),
+				'desc_tip'    => true,
+				'default'     => 'no',
 			),
 			'days_to_pay' => array(
 				'title'             => __( 'Days to Pay', 'wc-itau-shopline' ),
@@ -150,42 +159,42 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 				'custom_attributes' => array(
 					'step' => '1',
 					'min'  => '1',
-					'max'  => '30'
-				)
+					'max'  => '30',
+				),
 			),
 			'note_line1' => array(
 				'title'       => __( 'Notes (line 1)', 'wc-itau-shopline' ),
 				'type'        => 'textarea',
 				'description' => __( 'Can not be more than 60 characters.', 'wc-itau-shopline' ),
 				'desc_tip'    => true,
-				'default'     => ''
+				'default'     => '',
 			),
 			'note_line2' => array(
 				'title'       => __( 'Notes (line 2)', 'wc-itau-shopline' ),
 				'type'        => 'textarea',
 				'description' => __( 'Can not be more than 60 characters.', 'wc-itau-shopline' ),
 				'desc_tip'    => true,
-				'default'     => ''
+				'default'     => '',
 			),
 			'note_line3' => array(
 				'title'       => __( 'Notes (line 3)', 'wc-itau-shopline' ),
 				'type'        => 'textarea',
 				'description' => __( 'Can not be more than 60 characters.', 'wc-itau-shopline' ),
 				'desc_tip'    => true,
-				'default'     => ''
+				'default'     => '',
 			),
 			'testing' => array(
 				'title'       => __( 'Gateway Testing', 'wc-itau-shopline' ),
 				'type'        => 'title',
-				'description' => ''
+				'description' => '',
 			),
 			'debug' => array(
 				'title'       => __( 'Debug Log', 'wc-itau-shopline' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable logging', 'wc-itau-shopline' ),
 				'default'     => 'no',
-				'description' => sprintf( __( 'Log Itau Shopline events, you can check this log in %s.', 'wc-itau-shopline' ), '<a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=' . esc_attr( $this->id ) . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.log' ) ) . '">' . __( 'System Status &gt; Logs', 'wc-itau-shopline' ) . '</a>' )
-			)
+				'description' => sprintf( __( 'Log Itau Shopline events, you can check this log in %s.', 'wc-itau-shopline' ), '<a href="' . esc_url( admin_url( 'admin.php?page=wc-status&tab=logs&log_file=' . esc_attr( $this->id ) . '-' . sanitize_file_name( wp_hash( $this->id ) ) . '.log' ) ) . '">' . __( 'System Status &gt; Logs', 'wc-itau-shopline' ) . '</a>' ),
+			),
 		);
 	}
 
@@ -260,7 +269,12 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 				}
 
 				$hash = $this->api->get_payment_hash( $order );
-				$url  = $this->api->get_shopline_url( $hash );
+
+				if ( 'yes' === $this->billet_only ) {
+					$url = $this->api->get_ticket_url( $hash );
+				} else {
+					$url = $this->api->get_shopline_url( $hash );
+				}
 
 				wp_redirect( esc_url_raw( $url ) );
 				exit;
