@@ -61,7 +61,7 @@ class WC_Itau_Shopline_Cripto {
 		}
 
 		if ( strlen( $key ) != self::KEY_LENGTH ) {
-			throw new Exception( sprintf( __( 'The key size can not be different of %d positions.', 'wc-itau-shopline' ), self::CODE_LENGTH ) );
+			throw new Exception( sprintf( __( 'The key size can not be different of %d positions.', 'wc-itau-shopline' ), self::KEY_LENGTH ) );
 		}
 
 		$this->code = strtoupper( $code );
