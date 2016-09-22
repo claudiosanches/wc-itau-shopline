@@ -106,7 +106,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 				'type'        => 'text',
 				'description' => __( 'This controls the title which the user sees during checkout.', 'wc-itau-shopline' ),
 				'desc_tip'    => true,
-				'default'     => __( 'Backing Ticket or Online Debit', 'wc-itau-shopline' ),
+				'default'     => __( 'Backing Billet or Online Debit', 'wc-itau-shopline' ),
 			),
 			'description' => array(
 				'title'       => __( 'Description', 'wc-itau-shopline' ),
@@ -271,7 +271,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 				$hash = $this->api->get_payment_hash( $order );
 
 				if ( 'yes' === $this->billet_only ) {
-					$url = $this->api->get_ticket_url( $hash );
+					$url = $this->api->get_billet_url( $hash );
 				} else {
 					$url = $this->api->get_shopline_url( $hash );
 				}

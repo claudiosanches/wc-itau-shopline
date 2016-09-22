@@ -26,11 +26,11 @@ class WC_Itau_Shopline_API {
 	protected $shopline_url = 'https://shopline.itau.com.br/shopline/shopline.aspx';
 
 	/**
-	 * Ticket URL.
+	 * Billet URL.
 	 *
 	 * @var string
 	 */
-	protected $ticket_url = 'https://shopline.itau.com.br/shopline/Itaubloqueto.aspx';
+	protected $billet_url = 'https://shopline.itau.com.br/shopline/Itaubloqueto.asp';
 
 	/**
 	 * Request URL.
@@ -144,18 +144,18 @@ class WC_Itau_Shopline_API {
 	}
 
 	/**
-	 * Get Ticket URL.
+	 * Get billet URL.
 	 *
 	 * @param  string $hash
 	 *
 	 * @return string
 	 */
-	public function get_ticket_url( $hash ) {
-		return $this->ticket_url . '?DC=' . $hash;
+	public function get_billet_url( $hash ) {
+		return $this->billet_url . '?DC=' . $hash;
 	}
 
 	/**
-	 * Get Request URL.
+	 * Get request URL.
 	 *
 	 * @param  string $hash
 	 *
@@ -175,7 +175,7 @@ class WC_Itau_Shopline_API {
 	protected function get_payment_type_name( $type ) {
 		$types = array(
 			'01' => __( 'direct debit or financing', 'wc-itau-shopline' ),
-			'02' => __( 'banking ticket', 'wc-itau-shopline' ),
+			'02' => __( 'banking billet', 'wc-itau-shopline' ),
 			'03' => __( 'credit card', 'wc-itau-shopline' ),
 		);
 
