@@ -164,20 +164,6 @@ class WC_Itau_Shopline_Cripto {
 	}
 
 	/**
-	 * Remove accents.
-	 *
-	 * @param  string $string
-	 *
-	 * @return string
-	 */
-	private function remove_accents( $string ) {
-		$after  = 'ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ';
-		$before = 'SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy';
-
-		return strtr( utf8_decode( $string ), utf8_decode( $after ), $before );
-	}
-
-	/**
 	 * Convert data.
 	 *
 	 * @param  string $data
@@ -289,14 +275,14 @@ class WC_Itau_Shopline_Cripto {
 		$args['order_total']  = $this->fill_zeros( number_format( $args['order_total'], 2, '', '' ) , 10 );
 
 		// Remove accents.
-		$args['description']   = $this->remove_accents( $args['description'] );
-		$args['customer_name'] = $this->remove_accents( $args['customer_name'] );
-		$args['address']       = $this->remove_accents( $args['address'] );
-		$args['neighborhood']  = $this->remove_accents( $args['neighborhood'] );
-		$args['city']          = $this->remove_accents( $args['city'] );
-		$args['note_line1']    = $this->remove_accents( $args['note_line1'] );
-		$args['note_line2']    = $this->remove_accents( $args['note_line2'] );
-		$args['note_line3']    = $this->remove_accents( $args['note_line3'] );
+		$args['description']   = remove_accents( $args['description'] );
+		$args['customer_name'] = remove_accents( $args['customer_name'] );
+		$args['address']       = remove_accents( $args['address'] );
+		$args['neighborhood']  = remove_accents( $args['neighborhood'] );
+		$args['city']          = remove_accents( $args['city'] );
+		$args['note_line1']    = remove_accents( $args['note_line1'] );
+		$args['note_line2']    = remove_accents( $args['note_line2'] );
+		$args['note_line3']    = remove_accents( $args['note_line3'] );
 
 		// Fill empty values.
 		$args['description']   = $this->fill_empty( $args['description'], 40 );
