@@ -26,7 +26,6 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	 */
 	public function __construct() {
 		$this->id                 = 'itau-shopline';
-		$this->icon               = apply_filters( 'wc_itau_shopline_icon', plugins_url( 'assets/images/itau.png', plugin_dir_path( __FILE__ ) ) );
 		$this->method_title       = __( 'Itau Shopline', 'wc-itau-shopline' );
 		$this->method_description = __( 'Accept payments by credit card, online debit or banking billet using the Itau Shopline.', 'wc-itau-shopline' );
 
@@ -58,11 +57,29 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 			$this->debug
 		);
 
+		// Set the icon.
+		$this->icon = apply_filters( 'wc_itau_shopline_icon', $this->get_custom_icon_url() );
+
 		// Actions.
 		add_action( 'woocommerce_api_wc_itau_shopline_gateway', array( $this, 'payment_redirect' ) );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 		add_action( 'woocommerce_thankyou_' . $this->id, array( $this, 'thankyou_page' ) );
 		add_action( 'woocommerce_email_after_order_table', array( $this, 'email_instructions' ), 10, 3 );
+	}
+
+	/**
+	 * Get custom icon URL.
+	 *
+	 * @return string
+	 */
+	protected function get_custom_icon_url() {
+		if ( 'yes' === $this->billet_only ) {
+			$icon = 'banking-billet.png';
+		} else {
+			$icon = 'itau.png';
+		}
+
+		return plugins_url( 'assets/images/' . $icon, plugin_dir_path( __FILE__ ) );
 	}
 
 	/**
