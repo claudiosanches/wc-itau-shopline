@@ -163,7 +163,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 				'title'       => __( 'Only banking billet', 'wc-itau-shopline' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Allow only banking billet', 'wc-itau-shopline' ),
-				'description' => __( 'Allow payments only by banking billet', 'wc-itau-shopline' ),
+				'description' => __( 'Allows only payments by banking billet.', 'wc-itau-shopline' ),
 				'desc_tip'    => true,
 				'default'     => 'no',
 			),
