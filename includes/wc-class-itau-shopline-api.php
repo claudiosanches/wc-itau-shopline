@@ -236,15 +236,15 @@ class WC_Itau_Shopline_API {
 	protected function get_cpf_cnpj( $order ) {
 		$wcbcf_settings = get_option( 'wcbcf_settings' );
 
-		if ( 0 != $wcbcf_settings['person_type'] ) {
-			if ( ( 1 == $wcbcf_settings['person_type'] && 1 == $order->billing_persontype ) || 2 == $wcbcf_settings['person_type'] ) {
+		if ( '0' !== $wcbcf_settings['person_type'] ) {
+			if ( ( 1 == $wcbcf_settings['person_type'] && '1' === $order->billing_persontype ) || '2' === $wcbcf_settings['person_type'] ) {
 				return array(
 					'code'   => '01',
 					'number' => $this->only_numbers( $order->billing_cpf )
 				);
 			}
 
-			if ( ( 1 == $wcbcf_settings['person_type'] && 2 == $order->billing_persontype ) || 3 == $wcbcf_settings['person_type'] ) {
+			if ( ( '1' === $wcbcf_settings['person_type'] && '2' === $order->billing_persontype ) || '3' === $wcbcf_settings['person_type'] ) {
 				return array(
 					'code'   => '02',
 					'number' => $this->only_numbers( $order->billing_cnpj )
@@ -338,7 +338,7 @@ class WC_Itau_Shopline_API {
 			'return_url'    => '', // Just for payment type notification and for websites over SSL.
 			'note_line1'    => $this->note_line1,
 			'note_line2'    => $this->note_line2,
-			'note_line3'    => $this->note_line3
+			'note_line3'    => $this->note_line3,
 		);
 
 		$data = apply_filters( 'wc_itau_shopline_payment_data', $data );
