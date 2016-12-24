@@ -17,10 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'WC_Itau_Shopline' ) ) :
 
-// Load plugin classes
-include_once 'includes/wc-class-itau-shopline-cripto.php';
-include_once 'includes/wc-class-itau-shopline-api.php';
-include_once 'includes/wc-class-itau-shopline-sounder.php';
+// Load plugin classes.
+include_once dirname( __FILE__ ) . '/includes/wc-class-itau-shopline-cripto.php';
+include_once dirname( __FILE__ ) . '/includes/wc-class-itau-shopline-api.php';
+include_once dirname( __FILE__ ) . '/includes/wc-class-itau-shopline-sounder.php';
 
 /**
  * Itau Shopline for WooCommerce main class.
@@ -85,7 +85,7 @@ class WC_Itau_Shopline {
 	 * Includes.
 	 */
 	private function includes() {
-		include_once 'includes/wc-class-itau-shopline-gateway.php';
+		include_once dirname( __FILE__ ) . '/includes/wc-class-itau-shopline-gateway.php';
 	}
 
 	/**
@@ -127,7 +127,7 @@ class WC_Itau_Shopline {
 	 * Dependencies notices.
 	 */
 	public function dependencies_notices() {
-		include_once 'includes/views/html-notice-woocommerce-missing.php';
+		include_once dirname( __FILE__ ) . '/includes/views/html-notice-woocommerce-missing.php';
 	}
 
 	/**

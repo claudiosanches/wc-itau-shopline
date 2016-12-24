@@ -219,7 +219,7 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	 * Admin page.
 	 */
 	public function admin_options() {
-		include 'views/html-admin-page.php';
+		include dirname( __FILE__ ) . '/views/html-admin-page.php';
 	}
 
 	/**

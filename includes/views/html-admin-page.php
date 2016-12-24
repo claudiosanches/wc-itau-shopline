@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php
 	if ( ! $this->using_supported_currency() && ! class_exists( 'woocommerce_wpml' ) ) {
-		include 'html-notice-currency-not-supported.php';
+		include dirname( __FILE__ ) . '/html-notice-currency-not-supported.php';
 	}
 ?>
 
