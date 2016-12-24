@@ -3,7 +3,7 @@
  * Plugin Name: Itau Shopline for WooCommerce
  * Plugin URI:  https://github.com/claudiosanches/wc-itau-shopline
  * Description: Itau Shopline payment gateway for WooCommerce.
- * Author:      CLaudio Sanches
+ * Author:      Claudio Sanches
  * Author URI:  https://claudiosmweb.com
  * Version:     1.1.1
  * License:     GPLv2 or later
