@@ -229,32 +229,28 @@ class WC_Itau_Shopline_API {
 	/**
 	 * Get CPF or CNPJ.
 	 *
-	 * @param  WC_Order $order
+	 * @param  WC_Order $order Order object.
 	 *
 	 * @return array
 	 */
 	protected function get_cpf_cnpj( $order ) {
+		$code           = '00';
+		$number         = '';
 		$wcbcf_settings = get_option( 'wcbcf_settings' );
+		$type           = (int) $wcbcf_settings['person_type'];
+		$person_type    = (int) $order->billing_persontype;
 
-		if ( '0' !== $wcbcf_settings['person_type'] ) {
-			if ( ( 1 == $wcbcf_settings['person_type'] && '1' === $order->billing_persontype ) || '2' === $wcbcf_settings['person_type'] ) {
-				return array(
-					'code'   => '01',
-					'number' => $this->only_numbers( $order->billing_cpf )
-				);
-			}
-
-			if ( ( '1' === $wcbcf_settings['person_type'] && '2' === $order->billing_persontype ) || '3' === $wcbcf_settings['person_type'] ) {
-				return array(
-					'code'   => '02',
-					'number' => $this->only_numbers( $order->billing_cnpj )
-				);
-			}
+		if ( ( 1 === $type && 1 === $person_type ) || 2 === $type ) {
+			$code   = '01';
+			$number = $this->only_numbers( $order->billing_cpf );
+		} elseif ( ( 1 === $type && 2 === $person_type ) || 3 === $type ) {
+			$code   = '02';
+			$number = $this->only_numbers( $order->billing_cnpj );
 		}
 
 		return array(
-			'code'   => '00',
-			'number' => ''
+			'code'   => $code,
+			'number' => $number,
 		);
 	}
 
