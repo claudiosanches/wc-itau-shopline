@@ -1,14 +1,30 @@
 <?php
 /**
  * Plugin Name: Itau Shopline for WooCommerce
- * Plugin URI: https://github.com/claudiosmweb/wc-itau-shopline
+ * Plugin URI:  https://github.com/claudiosanches/wc-itau-shopline
  * Description: Itau Shopline payment gateway for WooCommerce.
- * Author: Claudio Sanches
- * Author URI: https://claudiosmweb.com/
- * Version: 1.1.0
- * License: GPLv2 or later
+ * Author:      CLaudio Sanches
+ * Author URI:  https://claudiosmweb.com
+ * Version:     1.1.1
+ * License:     GPLv2 or later
  * Text Domain: wc-itau-shopline
- * Domain Path: languages/
+ * Domain Path: /languages
+ *
+ * Itau Shopline for WooCommerce is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * any later version.
+ *
+ * Itau Shopline for WooCommerce is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Itau Shopline for WooCommerce. If not, see
+ * <https://www.gnu.org/licenses/gpl-2.0.txt>.
+ *
+ * @package WC_Itau_Shopline
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -32,7 +48,7 @@ class WC_Itau_Shopline {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.1.0';
+	const VERSION = '1.1.1';
 
 	/**
 	 * Instance of this class.

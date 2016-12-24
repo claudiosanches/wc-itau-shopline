@@ -2,8 +2,8 @@
 **Contributors:** claudiosanches  
 **Tags:** woocommerce, itau, shopline, payment  
 **Requires at least:** 4.0  
-**Tested up to:** 4.6  
-**Stable tag:** 1.1.0  
+**Tested up to:** 4.7  
+**Stable tag:** 1.1.1  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -112,6 +112,10 @@ Por favor, caso você tenha algum problema com o funcionamento do plugin, [abra 
 
 ## Changelog ##
 
+### 1.1.1 - 2016/12/24 ###
+
+- Melhorias na forma que coleta os números de CPF e CNPJ.
+
 ### 1.1.0 - 2016/09/22 ###
 
 - Adicionada opção para gerar apenas boletos.
@@ -123,7 +127,6 @@ Por favor, caso você tenha algum problema com o funcionamento do plugin, [abra 
 
 ## Upgrade Notice ##
 
-### 1.1.0 ###
+### 1.1.1 ###
 
-- Adicionada opção para gerar apenas boletos.
-- Corrigida uma mensagem de erro incorreta que aparecia na página de pagar o pedido quando feito pelo painel de administração.
+- Melhorias na forma que coleta os números de CPF e CNPJ.

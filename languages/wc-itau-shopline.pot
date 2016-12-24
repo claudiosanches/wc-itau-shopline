@@ -1,10 +1,10 @@
-# Copyright (C) 2016 Claudio Sanches
+# Copyright (C) 2016 CLaudio Sanches
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Itau Shopline for WooCommerce 1.1.0\n"
+"Project-Id-Version: Itau Shopline for WooCommerce 1.1.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-itau-shopline\n"
-"POT-Creation-Date: 2016-09-22 05:17:45+00:00\n"
+"POT-Creation-Date: 2016-12-24 14:29:25+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,22 +59,22 @@ msgstr ""
 msgid "credit card"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-api.php:328
+#: includes/wc-class-itau-shopline-api.php:324
 msgid "Payment for order %s"
 msgstr ""
 
-#: includes/wc-class-itau-shopline-api.php:451
-#: includes/wc-class-itau-shopline-api.php:486
+#: includes/wc-class-itau-shopline-api.php:447
+#: includes/wc-class-itau-shopline-api.php:482
 msgid "Itau Shopline: Order expired for lack of pay."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-api.php:461
+#: includes/wc-class-itau-shopline-api.php:457
 msgid ""
 "Itau Shopline: Order canceled because customers not selected a form of "
 "payment yet."
 msgstr ""
 
-#: includes/wc-class-itau-shopline-api.php:476
+#: includes/wc-class-itau-shopline-api.php:472
 msgid "Itau Shopline: Payment approved using %s."
 msgstr ""
 
@@ -191,7 +191,7 @@ msgid "Allow only banking billet"
 msgstr ""
 
 #: includes/wc-class-itau-shopline-gateway.php:166
-msgid "Allow payments only by banking billet"
+msgid "Allows only payments by banking billet."
 msgstr ""
 
 #: includes/wc-class-itau-shopline-gateway.php:171
@@ -295,12 +295,12 @@ msgstr ""
 msgid "Make payment"
 msgstr ""
 
-#: wc-itau-shopline.php:142
+#: wc-itau-shopline.php:158
 msgid "Settings"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "https://github.com/claudiosmweb/wc-itau-shopline"
+msgid "https://github.com/claudiosanches/wc-itau-shopline"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -308,9 +308,9 @@ msgid "Itau Shopline payment gateway for WooCommerce."
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Claudio Sanches"
+msgid "CLaudio Sanches"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "https://claudiosmweb.com/"
+msgid "https://claudiosmweb.com"
 msgstr ""
