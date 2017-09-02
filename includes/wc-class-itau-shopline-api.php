@@ -449,39 +449,39 @@ class WC_Itau_Shopline_API {
 			return false;
 		}
 
-		// Cancel order if expired. And give some margin for payment
-		$order = wc_get_order( $order_id );
-		$now   = strtotime( current_time( 'mysql' ) );
-		$now = strtotime( '+ 1 days', $now );
-		$now = strtotime(date( 'Y-m-d', $now ).' 23:59:59');
-
-		$this->log->add( $this->id, '$order->wc_itau_shopline_expiry_time ' . $now );
-		if ($order->wc_itau_shopline_expiry_time < $now && 'on-hold' === $order->get_status() ) {
-			$order->update_status( 'cancelled', __( 'Itau Shopline: Order expired for lack of pay.', 'wc-itau-shopline' ) );
-
-			return false;
-		}
-
-		// Cancel order if the customer does not selected any payment type in one hour.
-		// If Boleto it can still be open, so ignore.
-		$payment_method_title = get_post_meta( $order->id, '_payment_method_title', true );
-		if ( '00' == $payment_details['payment_type'] && $payment_method_title != 'Boleto bancário') {
-			$limit_time = strtotime( '+60 minutes', strtotime( $order->order_date ) );
-			if ( $limit_time < $now ) {
-				$order->update_status( 'cancelled', __( 'Itau Shopline: Order canceled because customers not selected a form of payment yet.', 'wc-itau-shopline' ) );
-
-				return false;
-			}
-		}
-
 		// Process the order status.
-		switch ( $payment_details['status'] == '00' ||  $payment_details['status'] == '05' ) {
+		$order = wc_get_order( $order_id );
+		if ( $payment_details['status'] == '00' ||  $payment_details['status'] == '05' ) {
 				if ( ! in_array( $order->get_status(), array( 'processing', 'completed' ) ) ) {
 					$payment_type_name = $this->get_payment_type_name( $payment_details['payment_type'] );
 					$order->add_order_note( sprintf( __( 'Itau Shopline: Payment approved using %s.', 'wc-itau-shopline' ), $payment_type_name ) );
 					$order->payment_complete();
 
 					return true;
+				}
+		} else {
+				// Cancel order if expired. And give some margin for payment
+				$now   = strtotime( current_time( 'mysql' ) );
+				$now = strtotime( '+ 1 days', $now );
+				$now = strtotime(date( 'Y-m-d', $now ).' 23:59:59');
+
+				$this->log->add( $this->id, '$order->wc_itau_shopline_expiry_time ' . $now );
+				if ($order->wc_itau_shopline_expiry_time < $now && 'on-hold' === $order->get_status() ) {
+					$order->update_status( 'cancelled', __( 'Itau Shopline: Order expired for lack of pay.', 'wc-itau-shopline' ) );
+
+					return false;
+				}
+
+				// Cancel order if the customer does not selected any payment type in one hour.
+				// If Boleto it can still be open, so ignore.
+				$payment_method_title = get_post_meta( $order->id, '_payment_method_title', true );
+				if ( '00' == $payment_details['payment_type'] && $payment_method_title != 'Boleto bancário') {
+					$limit_time = strtotime( '+60 minutes', strtotime( $order->order_date ) );
+					if ( $limit_time < $now ) {
+						$order->update_status( 'cancelled', __( 'Itau Shopline: Order canceled because customers not selected a form of payment yet.', 'wc-itau-shopline' ) );
+
+						return false;
+					}
 				}
 		}
 
