@@ -279,8 +279,8 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 			$order_id  = wc_get_order_id_by_order_key( $order_key );
 			$order     = wc_get_order( $order_id );
 
-			if ( is_object( $order ) && $this->id === $order->payment_method ) {
-				if ( 'on-hold' !== $order->status ) {
+			if ( is_object( $order ) && $this->id === $order->get_payment_method() ) {
+				if ( 'on-hold' !== $order->get_status() ) {
 					$message = sprintf( __( 'You can no longer make the payment for order %s.', 'wc-itau-shopline' ), $order->get_order_number() );
 					wp_die( $message, __( 'Payment method expired', 'wc-itau-shopline' ), array( 'response' => 200 ) );
 				}
@@ -308,17 +308,17 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	 * @param int $order_id
 	 */
 	public function thankyou_page( $order_id ) {
-		$order = wc_get_order( $order_id );
-
-		wc_get_template(
-			'payment-instructions.php',
-			array(
-				'url'         => WC_Itau_Shopline::get_payment_url( $order->order_key ),
-				'billet_only' => 'yes' === $this->billet_only,
-			),
-			'woocommerce/itau-shopline/',
-			WC_Itau_Shopline::get_templates_path()
-		);
+		// $order = wc_get_order( $order_id );
+		//
+		// wc_get_template(
+		// 	'payment-instructions.php',
+		// 	array(
+		// 		'url'         => WC_Itau_Shopline::get_payment_url( $order->order_key ),
+		// 		'billet_only' => 'yes' === $this->billet_only,
+		// 	),
+		// 	'woocommerce/itau-shopline/',
+		// 	WC_Itau_Shopline::get_templates_path()
+		// );
 	}
 
 	/**
@@ -329,11 +329,11 @@ class WC_Itau_Shopline_Gateway extends WC_Payment_Gateway {
 	 * @param  bool   $plain_text    Plain text or HTML.
 	 */
 	public function email_instructions( $order, $sent_to_admin, $plain_text = false ) {
-		if ( $sent_to_admin || 'on-hold' !== $order->get_status() || $this->id !== $order->payment_method ) {
+		if ( $sent_to_admin || 'on-hold' !== $order->get_status() || $this->id !== $order->get_payment_method() ) {
 			return;
 		}
 
-		$url = WC_Itau_Shopline::get_payment_url( $order->order_key );
+		$url = WC_Itau_Shopline::get_payment_url( $order->get_order_key() );
 
 		if ( $plain_text ) {
 			wc_get_template(
