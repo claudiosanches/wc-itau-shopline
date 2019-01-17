@@ -326,7 +326,7 @@ class WC_Itau_Shopline_API {
 			'registration'  => $document['code'],
 			'document'      => $document['number'],
 			'address'       => $order->billing_address_1,
-			'neighborhood'  => $order->billing_neighborhood,
+			'neighborhood'  => $order->billing_neighborhood != '' ? $order->billing_neighborhood : '-',
 			'zipcode'       => $this->only_numbers( $order->billing_postcode ),
 			'city'          => $order->billing_city,
 			'state'         => $order->billing_state,
