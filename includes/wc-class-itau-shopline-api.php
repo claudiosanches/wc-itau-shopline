@@ -443,7 +443,8 @@ class WC_Itau_Shopline_API {
 		$now   = strtotime( current_time( 'mysql' ) );
 
 		// Cancel order if expired.
-		if ( $order->wc_itau_shopline_expiry_time < $now && 'on-hold' === $order->get_status() ) {
+		$shopline_expiry_time = apply_filters('wc_itau_shopline_expiry_time', $order->wc_itau_shopline_expiry_time);
+		if ( $shopline_expiry_time < $now && 'on-hold' === $order->get_status() ) {
 			$order->update_status( 'cancelled', __( 'Itau Shopline: Order expired for lack of pay.', 'wc-itau-shopline' ) );
 
 			return false;
